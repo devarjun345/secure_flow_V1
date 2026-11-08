@@ -1,0 +1,1 @@
+export { SeparatorComponent as Separator, type SeparatorProps } from './Separator';

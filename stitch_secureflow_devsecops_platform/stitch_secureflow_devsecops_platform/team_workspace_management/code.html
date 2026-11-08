@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary-container": "#00a572", "primary-fixed": "#d8e2ff", "surface-container-highest": "#32343f", "outline": "#8c909f", "tertiary-fixed-dim": "#4edea3", "on-tertiary-fixed": "#002113", "tertiary": "#4edea3", "surface-variant": "#32343f", "surface-bright": "#363943", "surface-container-low": "#181b25", "on-tertiary-fixed-variant": "#005236", "error-container": "#93000a", "on-error": "#690005", "inverse-surface": "#e0e2ef", "on-surface-variant": "#c2c6d6", "surface-container": "#1c1f29", "on-secondary-fixed": "#23005c", "background": "#10131c", "inverse-primary": "#005ac2", "on-background": "#e0e2ef", "on-primary-container": "#00285d", "on-secondary-fixed-variant": "#5516be", "on-error-container": "#ffdad6", "secondary-container": "#571bc1", "surface": "#10131c", "error": "#ffb4ab", "surface-container-lowest": "#0b0e17", "inverse-on-surface": "#2d303a", "surface-tint": "#adc6ff", "tertiary-fixed": "#6ffbbe", "secondary-fixed-dim": "#d0bcff", "surface-dim": "#10131c", "on-primary-fixed-variant": "#004395", "outline-variant": "#424754", "on-secondary": "#3c0091", "on-secondary-container": "#c4abff", "primary-container": "#4d8eff", "on-surface": "#e0e2ef", "surface-container-high": "#272a34", "on-primary": "#002e6a", "on-primary-fixed": "#001a42", "on-tertiary-container": "#00311f", "secondary-fixed": "#e9ddff", "primary": "#adc6ff", "on-tertiary": "#003824", "secondary": "#d0bcff", "primary-fixed-dim": "#adc6ff" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "margin-mobile": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin": "2rem", "space-xl": "2.5rem", "gutter-mobile": "0.75rem", "space-md": "1rem", "space-xs": "0.25rem", "gutter": "1.5rem" }, "fontFamily": { "headline-lg": ["Geist"], "code-sm": ["JetBrains Mono"], "body-lg": ["Inter"], "headline-lg-mobile": ["Geist"], "label-md": ["Inter"], "headline-md": ["Geist"], "headline-sm": ["Geist"], "body-sm": ["Inter"], "code-lg": ["JetBrains Mono"], "body-md": ["Inter"], "label-xs": ["JetBrains Mono"], "code-md": ["JetBrains Mono"], "display-xl": ["Geist"] }, "fontSize": { "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "code-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "code-md": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "display-xl": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }] } } } }</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-md flex items-center justify-between bg-surface-container-low/40"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center"><span class="material-symbols-outlined text-primary text-headline-sm">security</span></div><span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">SecureFlow</span></div><span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-xs text-label-xs tracking-wider uppercase">ENTERPRISE</span></div><div class="px-space-md py-space-sm"><span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Mission Control</span></div><nav class="flex flex-col gap-space-xs px-space-sm" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="overview" href="#"><span class="font-label-md text-label-md">Overview</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="repositories" href="#"><span class="font-label-md text-label-md">Repositories</span><span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm">14</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="scan-center" href="#"><span class="font-label-md text-label-md">Scan Center</span><span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="vulnerabilities" href="#"><span class="font-label-md text-label-md">Vulnerabilities</span><span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-code-sm text-code-sm font-semibold">3</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="security-reports" href="#"><span class="font-label-md text-label-md">Security Reports</span></a><div class="my-space-xs px-space-sm"><div class="h-px w-full bg-surface-container-high/60"></div></div><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="team-and-access" href="#"><span class="font-label-md text-label-md">Team &amp; Access</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="settings" href="#"><span class="font-label-md text-label-md">Settings</span></a></nav></div><div class="p-space-md bg-surface-container-low/50 flex flex-col gap-space-sm"><div class="flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-xs text-label-xs text-outline uppercase">Engine Pipeline</span><span class="font-code-sm text-code-sm text-tertiary">ONLINE</span></div><div class="flex items-center justify-between px-space-sm py-space-xs rounded bg-surface-container-lowest"><span class="font-code-sm text-code-sm text-on-surface-variant">Trivy Core v0.51</span><span class="font-code-sm text-code-sm text-tertiary">ACTIVE</span></div><div class="flex items-center justify-between px-space-sm py-space-xs rounded bg-surface-container-lowest"><span class="font-code-sm text-code-sm text-on-surface-variant">Gitleaks v8.18</span><span class="font-code-sm text-code-sm text-primary">READY</span></div></div><div class="flex flex-col gap-space-xs pt-space-xs"><div class="flex justify-between font-label-xs text-label-xs text-on-surface-variant"><span>Storage Quota</span><span class="font-code-sm text-code-sm text-on-surface">68.4%</span></div><div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden"><div class="h-full bg-primary-container rounded-full w-[68%]"></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined text-primary text-base">verified</span><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Acme Corp</span><span class="font-label-xs text-label-xs text-outline leading-tight">SecOps Core</span></div><span class="material-symbols-outlined text-outline text-base">expand_more</span></div><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-sm text-outline text-base pointer-events-none">search</span><input class="w-96 pl-9 pr-14 py-space-xs rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-high transition-all" placeholder="Search CVEs, repositories, secrets, packages..." type="text"/><span class="absolute right-space-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-outline font-code-sm text-code-sm">⌘K</span></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container"><span class="w-2 h-2 rounded-full bg-tertiary"></span><span class="font-label-xs text-label-xs text-on-surface-variant font-medium">System Guard Active</span><span class="font-label-xs text-label-xs text-outline">|</span><span class="font-label-xs text-label-xs text-tertiary">0 Zero-Days</span></div><div class="flex items-center gap-space-sm"><button class="px-space-sm py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-space-xs" type="button"><span class="material-symbols-outlined text-base">terminal</span>Connect GitHub</button><button class="px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-md text-label-md font-semibold transition-all shadow-[0_0_14px_-2px_rgba(77,142,255,0.4)] flex items-center gap-space-xs" type="button"><span class="material-symbols-outlined text-base">play_arrow</span>Trigger Manual Scan</button></div><div class="h-5 w-px bg-surface-container-high"></div><div class="relative cursor-pointer p-space-xs rounded-lg hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-on-surface-variant text-headline-sm">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></div><div class="flex items-center gap-space-sm pl-space-xs cursor-pointer"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold">Alex Mercer</span><span class="font-label-xs text-label-xs text-outline">Principal SecOps Lead</span></div><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/ALJJyrCzuy7DChqWGe7d8bvYTVn-VS5xML6WMGiPSEfh6c4FNhj1xo5JdP5VeBev7h-t51280Psm5Ybueg4iKBh6Cw0taOzRThTc2f6xIIjrEkRk0Ns6qnE_TS6uyQrsUerjnpdWfxnpLvHgrQlZmqfRq33ONMlqRc5oYdEQV5GDvCTXeKbavmcdnzJx5Sxmm9CNrxCM2m_3KdUnhRx_9oY9o18fDN3JdJ-ygCiTLsoRrHumzw"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface-container-lowest"></span></div></div></div></header><main class="relative pt-16 bg-surface min-h-screen px-gutter py-space-lg w-full"><div class="flex flex-col w-full">
+<div class="w-full bg-gradient-to-r from-secondary-container/40 via-surface-container-high/60 to-secondary-container/30 px-space-md py-space-xs rounded-xl shadow-md flex items-center justify-between gap-space-sm mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_rgba(208,188,255,0.8)]"></span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-secondary-fixed">DEMO SIMULATION ENVIRONMENT • Acme Corp SecOps Organization</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-code-sm text-code-sm text-on-surface-variant hidden md:inline">TENANT_ID: acme-core-091a</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-tertiary font-label-xs text-label-xs uppercase tracking-wider">SANDBOX_SYNCED</span>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Team &amp; Workspace Access Control</h1>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-label-xs text-label-xs uppercase">RBAC Active</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+        Manage organization members, Role-Based Access Control (RBAC), API provisioning keys, and cryptographic access audit policies.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="px-space-md py-space-sm rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" id="exportAuditBtn" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+        Export Audit Log
+      </button>
+<button class="px-space-md py-space-sm rounded-xl bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-all shadow-[0_0_16px_-2px_rgba(77,142,255,0.5)]" id="openInviteModalBtn" type="button">
+<span class="material-symbols-outlined text-base">person_add</span>
+        + Invite Team Member
+      </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-xl">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Total Members</span>
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">18 <span class="font-headline-sm text-headline-sm text-on-surface-variant font-normal">/ 25</span></span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">badge</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-xs text-label-xs text-on-surface-variant">
+<span>72% Seat Utilization</span>
+<span class="font-code-sm text-code-sm text-primary">7 Available</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-primary-container rounded-full w-[72%] shadow-[0_0_8px_rgba(77,142,255,0.8)]"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Roles Breakdown</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">3</span>
+<span class="font-label-md text-label-md text-on-surface-variant">tiers mapped</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+</div>
+<div class="mt-space-md grid grid-cols-3 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-lowest p-space-xs rounded flex flex-col">
+<span class="font-label-xs text-label-xs text-outline">Owners</span>
+<span class="font-code-lg text-code-lg text-secondary font-bold">2</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex flex-col">
+<span class="font-label-xs text-label-xs text-outline">Admins</span>
+<span class="font-code-lg text-code-lg text-primary font-bold">4</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex flex-col">
+<span class="font-label-xs text-label-xs text-outline">SecOps</span>
+<span class="font-code-lg text-code-lg text-tertiary font-bold">12</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">MFA Policy Status</span>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-tertiary font-bold">100%</span>
+<span class="font-label-md text-label-md text-tertiary font-semibold">Active</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">security_update_good</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center gap-space-xs bg-surface-container-lowest px-space-sm py-space-xs rounded">
+<span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_6px_rgba(78,222,163,0.8)]"></span>
+<span class="font-label-xs text-label-xs text-on-surface-variant truncate">FIDO2 / Hardware WebAuthn Enforced</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Pending Invites</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">3</span>
+<span class="font-label-md text-label-md text-outline">in-flight</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined">forward_to_inbox</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between text-on-surface-variant font-label-xs text-label-xs">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">schedule</span>
+          Avg turnaround 3.4h
+        </span>
+<span class="font-code-sm text-code-sm text-on-surface">GH Sync: OK</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-xl">
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col">
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm pb-space-md">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-outline text-base">search</span>
+<input class="w-full pl-9 pr-space-md py-space-xs bg-surface-container text-on-surface placeholder:text-outline rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-high transition-colors" id="memberSearchInput" placeholder="Filter by name, email, GitHub handle or role..." type="text"/>
+</div>
+<div class="flex items-center gap-space-xs">
+<select class="bg-surface-container text-on-surface font-label-md text-label-md px-space-sm py-space-xs rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors cursor-pointer" id="roleFilter">
+<option value="all">All Roles</option>
+<option value="OWNER">Owner</option>
+<option value="ADMIN">Admin</option>
+<option value="MEMBER">Member</option>
+<option value="AUDITOR">Read-Only</option>
+</select>
+<select class="bg-surface-container text-on-surface font-label-md text-label-md px-space-sm py-space-xs rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors cursor-pointer" id="mfaFilter">
+<option value="all">2FA: All</option>
+<option value="enforced">Enforced</option>
+<option value="grace">Grace Period</option>
+</select>
+<button class="px-space-xs py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors" id="toggleStateBtn" title="Toggle Simulation Empty State" type="button">
+<span class="material-symbols-outlined text-base">swap_horiz</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto" id="membersTableView">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-lowest/60 text-outline font-label-xs text-label-xs uppercase tracking-wider">
+<th class="py-space-xs px-space-sm rounded-l">Member &amp; Identity</th>
+<th class="py-space-xs px-space-sm">RBAC Role</th>
+<th class="py-space-xs px-space-sm">2FA Security</th>
+<th class="py-space-xs px-space-sm">Last Active</th>
+<th class="py-space-xs px-space-sm rounded-r text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm divide-y-0" id="membersTableBody">
+<tr class="hover:bg-surface-container/60 transition-colors group">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm shrink-0" data-alt="High precision photorealistic close-up avatar of Alex Mercer, tech security lead with soft cyan server room lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwWJCb-mzjDOh5jJ5nrCjkKBIjoGa_M2SUsxReLt3wJbOnHpJ1Dxk_SLvNJ5XVDXf9YJfqgcVM3mgGHMwwN5bYywFuCBEOSWg2OUDAkQepKJ-IcHsN-Eqxrm7g4OMgG8eM8i75CqWimfUiiVYo26IGC7WLn6n79pfVQSyfrAQwy9at5KUUDvmkFglYg-_GmJa2_70e2ErrUICRgiv6835D_IieFa9Nxwu-qk3ti1A4"/>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Alex Mercer</span>
+<span class="px-1.5 py-0.5 rounded bg-primary/20 text-primary font-label-xs text-label-xs">You</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline truncate">alex@acme.corp • @mercer-sec</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-secondary-container/40 text-secondary-fixed font-code-sm text-code-sm font-semibold tracking-wider">OWNER</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-xs text-label-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Hardware Token
+                  </span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="font-code-sm text-code-sm text-tertiary font-medium">Just now</span>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-bright text-on-surface font-label-xs text-label-xs uppercase tracking-wider transition-colors" type="button">
+                    Manage Keys
+                  </button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors group">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm shrink-0" data-alt="Photorealistic portrait of Sarah Chen, DevSecOps architect in tech environment with cyber violet ambient rim lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPeUCEOTJOPoRgnleDzlsEXxE15WFqV5pyPKyuHY7HPaTX9zbwuNb7d97sIfc9cNeQuG1gFdtAfrsx12O-oxgVUz6u-l2V76zh6lyXSLyaIfhAnUNse7ydgH6r7PbplG0V0IleV15_lP5pBpGJ3rLAaJFBXn3Aw0ThAgqajUh078SfK3i9n4QcqZa6sHAZdiosZTfmJZvk1Kjri4cy3TTMghvsI7CLM9JlhsRXbKQ4"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Sarah Chen</span>
+<span class="font-code-sm text-code-sm text-outline truncate">sarah.chen@acme.corp • @schen-dev</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-primary-container/30 text-primary-fixed font-code-sm text-code-sm font-semibold tracking-wider">ADMIN</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-xs text-label-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Enforced
+                  </span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="font-code-sm text-code-sm text-on-surface-variant">14m ago</span>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" title="Change Role" type="button">
+<span class="material-symbols-outlined text-base">tune</span>
+</button>
+<button class="p-1 rounded hover:bg-error-container/30 text-outline hover:text-error" title="Revoke Access" type="button">
+<span class="material-symbols-outlined text-base">person_remove</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors group">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm shrink-0" data-alt="Portrait of Marcus Vance, senior cloud engineer with dark tactical styling and subtle deep space blue glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCDuCsVGpKv_fUEchXKR2dcV-iubWXJliWz_afgYk6U3eZXuJtvdF6ny74m1EYjllopFVn5sotRntJ8B_E9gf0APAWi_XimJPYcikoho4_JyMsY6CLs4rRMDDKKiAYrM6zYdDwlgeRw96px1uTQhkFFkR_h7kmWCKpdvVT7AdXgrz38iCvzpL1AOX5sgGrOPFO6SMGQ6ALeeLc2uMHo2Aj02a-jWrhv9fruTWrc3rX"/>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Marcus Vance</span>
+<span class="text-outline font-label-xs text-label-xs">(DevSecOps)</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline truncate">marcus.v@acme.corp • @mvance-ops</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-code-sm text-code-sm tracking-wider">MEMBER</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-xs text-label-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Enforced
+                  </span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="font-code-sm text-code-sm text-on-surface-variant">2h ago</span>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" title="Change Role" type="button">
+<span class="material-symbols-outlined text-base">tune</span>
+</button>
+<button class="p-1 rounded hover:bg-error-container/30 text-outline hover:text-error" title="Revoke Access" type="button">
+<span class="material-symbols-outlined text-base">person_remove</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors group">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-high text-primary font-bold font-headline-sm flex items-center justify-center shrink-0">
+                      ER
+                    </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Elena Rostova</span>
+<span class="text-outline font-label-xs text-label-xs">(Frontend Lead)</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline truncate">elena@acme.corp • @erostova</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-code-sm text-code-sm tracking-wider">MEMBER</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-xs text-label-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Enforced
+                  </span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Yesterday</span>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" title="Change Role" type="button">
+<span class="material-symbols-outlined text-base">tune</span>
+</button>
+<button class="p-1 rounded hover:bg-error-container/30 text-outline hover:text-error" title="Revoke Access" type="button">
+<span class="material-symbols-outlined text-base">person_remove</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors group">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-high text-tertiary font-bold font-headline-sm flex items-center justify-center shrink-0">
+                      DK
+                    </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">David Kim</span>
+<span class="text-outline font-label-xs text-label-xs">(AppSec)</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline truncate">david.k@acme.corp • @dkim-security</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-primary-container/30 text-primary-fixed font-code-sm text-code-sm font-semibold tracking-wider">ADMIN</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-xs text-label-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Enforced
+                  </span>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="font-code-sm text-code-sm text-on-surface-variant">3d ago</span>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" title="Change Role" type="button">
+<span class="material-symbols-outlined text-base">tune</span>
+</button>
+<button class="p-1 rounded hover:bg-error-container/30 text-outline hover:text-error" title="Revoke Access" type="button">
+<span class="material-symbols-outlined text-base">person_remove</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="hidden flex-col items-center justify-center py-space-xl text-center" id="membersEmptyState">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-outline mb-space-sm">
+<span class="material-symbols-outlined text-headline-lg">group_off</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface mb-1">No Members Found</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mb-space-md">No organization accounts match your query filter parameters or the sandbox database has been cleared.</p>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md" id="resetFilterBtn" type="button">
+            Reset Filters
+          </button>
+</div>
+<div class="flex items-center justify-between pt-space-md mt-space-sm bg-surface-container-lowest/30 px-space-sm rounded-lg">
+<span class="font-label-xs text-label-xs text-outline">Displaying 5 of 18 members</span>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded bg-surface-container text-outline hover:text-on-surface disabled:opacity-40" disabled="" type="button">
+<span class="material-symbols-outlined text-base">chevron_left</span>
+</button>
+<span class="px-2 font-code-sm text-code-sm text-primary font-bold">1</span>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-outline hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline">history</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Workspace Audit Trail</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">IMMUTABLE_LOG_V2</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest/60 hover:bg-surface-container-lowest transition-colors">
+<span class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0 shadow-[0_0_6px_rgba(77,142,255,0.7)]"></span>
+<div class="flex-1 flex flex-col min-w-0">
+<div class="flex items-center justify-between gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">
+                  Sarah Chen invited <span class="font-code-sm text-code-sm text-primary">@jordan-sre</span> with Role: ADMIN
+                </span>
+<span class="font-code-sm text-code-sm text-outline shrink-0">1 hour ago</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline truncate">Hash: sha256:7f90e...a801 • IP: 198.51.100.24 (SAML VPN)</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest/60 hover:bg-surface-container-lowest transition-colors">
+<span class="w-2 h-2 rounded-full bg-secondary mt-1.5 shrink-0 shadow-[0_0_6px_rgba(208,188,255,0.7)]"></span>
+<div class="flex-1 flex flex-col min-w-0">
+<div class="flex items-center justify-between gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">
+                  Marcus Vance rotated Personal Access Token <span class="font-code-sm text-code-sm text-secondary">ghp_secflow_***</span>
+</span>
+<span class="font-code-sm text-code-sm text-outline shrink-0">3 hours ago</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline truncate">Scope: read:packages, write:security_events • Exp: 90 days</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest/60 hover:bg-surface-container-lowest transition-colors">
+<span class="w-2 h-2 rounded-full bg-tertiary mt-1.5 shrink-0 shadow-[0_0_6px_rgba(78,222,163,0.7)]"></span>
+<div class="flex-1 flex flex-col min-w-0">
+<div class="flex items-center justify-between gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">
+                  Alex Mercer enforced Mandatory Hardware 2FA policy
+                </span>
+<span class="font-code-sm text-code-sm text-outline shrink-0">1 day ago</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline truncate">Policy ID: POL-FIDO2-ALL • Affects: 18 active accounts</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="xl:col-span-4 flex flex-col gap-space-lg">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-outline">mark_email_unread</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Pending Invitations</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary font-code-sm text-code-sm">3 Awaiting</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+          Invited accounts awaiting organization authorization or GitHub SAML association.
+        </p>
+<div class="flex flex-col gap-space-sm">
+<div class="p-space-sm bg-surface-container-lowest rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">jordan@acme.corp</span>
+<span class="font-code-sm text-code-sm text-primary">@jordan-sre</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/30 text-primary-fixed font-code-sm text-code-sm font-semibold">ADMIN</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-code-sm text-code-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">alarm</span>
+                Expires in 4 days
+              </span>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-xs text-label-xs" type="button">Resend</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-error-container/30 text-error font-label-xs text-label-xs" type="button">Revoke</button>
+</div>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">c.wright@acme.corp</span>
+<span class="font-code-sm text-code-sm text-primary">@c-wright</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-code-sm text-code-sm">MEMBER</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-code-sm text-code-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">alarm</span>
+                Expires in 6 days
+              </span>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-xs text-label-xs" type="button">Resend</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-error-container/30 text-error font-label-xs text-label-xs" type="button">Revoke</button>
+</div>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">audit.lead@partner.io</span>
+<span class="font-code-sm text-code-sm text-primary">@external-soc2</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-outline font-code-sm text-code-sm">AUDITOR</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-code-sm text-code-sm text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">warning</span>
+                Expires in 18 hours
+              </span>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-xs text-label-xs" type="button">Resend</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-error-container/30 text-error font-label-xs text-label-xs" type="button">Revoke</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary">person_add_alt</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Invite Member</span>
+</div>
+<span class="font-label-xs text-label-xs text-tertiary">FAST-PATH</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+          Provision direct GitHub Enterprise credentials with scoped RBAC roles.
+        </p>
+<form class="flex flex-col gap-space-sm" id="inviteFormQuick">
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Corporate Email</label>
+<input class="w-full px-space-sm py-space-xs rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-high transition-colors" placeholder="devsecops-eng@acme.corp" type="email"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-label-xs text-outline uppercase tracking-wider">GitHub Username</label>
+<div class="relative">
+<span class="absolute left-space-sm top-1/2 -translate-y-1/2 font-code-sm text-code-sm text-outline">@</span>
+<input class="w-full pl-7 pr-space-sm py-space-xs rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-code-sm text-code-sm focus:outline-none focus:bg-surface-container-high transition-colors" placeholder="octocat-sec" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 pt-space-xs">
+<label class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Assign Role Level</label>
+<div class="grid grid-cols-2 gap-space-xs">
+<label class="p-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer flex flex-col gap-0.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Member</span>
+<input checked="" class="text-primary focus:ring-0" name="quickRole" type="radio" value="member"/>
+</div>
+<span class="font-code-sm text-code-sm text-outline">Standard Dev</span>
+</label>
+<label class="p-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer flex flex-col gap-0.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary-fixed font-semibold">Admin</span>
+<input class="text-primary focus:ring-0" name="quickRole" type="radio" value="admin"/>
+</div>
+<span class="font-code-sm text-code-sm text-outline">SecOps Lead</span>
+</label>
+</div>
+</div>
+<button class="mt-space-sm w-full py-space-sm rounded-xl bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary font-label-md text-label-md font-semibold transition-all shadow-[0_0_12px_rgba(77,142,255,0.4)] flex items-center justify-center gap-space-xs" type="submit">
+<span class="material-symbols-outlined text-base">send</span>
+            Send GitHub Invite
+          </button>
+</form>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 bg-surface-container-lowest/80 backdrop-blur-md z-50 hidden items-center justify-center p-space-md" id="inviteModal">
+<div class="bg-surface-container-low max-w-2xl w-full rounded-xl p-space-lg shadow-2xl flex flex-col relative max-h-[921px] overflow-y-auto">
+<div class="flex items-start justify-between mb-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-primary animate-pulse"></span>
+<span class="font-headline-md text-headline-md text-on-surface">Invite Workspace Member</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Configure identity credentials and assign cryptographic access permissions for Acme Corp SecOps.
+          </p>
+</div>
+<button class="p-1 rounded-lg hover:bg-surface-container-high text-outline hover:text-on-surface" id="closeInviteModalBtn" type="button">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Corporate Email Address</label>
+<input class="w-full px-space-sm py-space-sm rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none focus:bg-surface-container-high" placeholder="colleague@acme.corp" type="email"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-label-xs text-outline uppercase tracking-wider">GitHub Enterprise Handle</label>
+<input class="w-full px-space-sm py-space-sm rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-code-md text-code-md focus:outline-none focus:bg-surface-container-high" placeholder="@octocat-acme" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Select Access Role (RBAC)</label>
+<div class="grid grid-cols-1 gap-space-xs">
+<label class="p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high cursor-pointer flex items-start gap-space-sm transition-colors">
+<input class="mt-1 text-primary focus:ring-0" name="modalRole" type="radio" value="owner"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md text-secondary font-bold">OWNER</span>
+<span class="font-label-xs text-label-xs text-outline">Root Privilege</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Full workspace governance, subscription management, API root keys, and organization deletion rights.</span>
+</div>
+</label>
+<label class="p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high cursor-pointer flex items-start gap-space-sm transition-colors">
+<input checked="" class="mt-1 text-primary focus:ring-0" name="modalRole" type="radio" value="admin"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md text-primary font-bold">ADMIN</span>
+<span class="px-1.5 py-0.5 rounded bg-primary-container/20 text-primary font-label-xs text-label-xs">Recommended for SecOps</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Manage scanners, Trivy/Gitleaks pipelines, repositories, triage CVEs, configure webhooks, invite members.</span>
+</div>
+</label>
+<label class="p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high cursor-pointer flex items-start gap-space-sm transition-colors">
+<input class="mt-1 text-primary focus:ring-0" name="modalRole" type="radio" value="member"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface font-bold">MEMBER</span>
+<span class="font-label-xs text-label-xs text-outline">Developer Access</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">View repo findings, trigger manual scans on assigned projects, create PR remediation branches.</span>
+</div>
+</label>
+<label class="p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high cursor-pointer flex items-start gap-space-sm transition-colors">
+<input class="mt-1 text-primary focus:ring-0" name="modalRole" type="radio" value="auditor"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md text-outline font-bold">AUDITOR / READ-ONLY</span>
+<span class="font-label-xs text-label-xs text-outline">Compliance Officer</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">View overall security posture, inspect CVE history, and export compliance reports only. Cannot trigger scans.</span>
+</div>
+</label>
+</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary">lock</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Enforce Hardware 2FA Immediately</span>
+<span class="font-label-xs text-label-xs text-outline">Invited user will be prompted to link FIDO2 key upon first SAML login</span>
+</div>
+</div>
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md" id="cancelModalBtn" type="button">
+            Cancel
+          </button>
+<button class="px-space-md py-space-sm rounded-xl bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary font-label-md text-label-md font-semibold transition-all shadow-[0_0_16px_rgba(77,142,255,0.4)] flex items-center gap-space-xs" id="confirmInviteBtn" type="button">
+<span class="material-symbols-outlined text-base">send</span>
+            Send GitHub Enterprise Invitation
+          </button>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-space-lg right-space-lg z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="toastNotification">
+<div class="bg-surface-container-high px-space-md py-space-sm rounded-xl shadow-2xl flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="font-label-md text-label-md text-on-surface" id="toastMessage">Action completed successfully</span>
+</div>
+</div>
+</div>
+<script>
+  (function initTeamManagement() {
+    const modal = document.getElementById('inviteModal');
+    const openBtn = document.getElementById('openInviteModalBtn');
+    const closeBtn = document.getElementById('closeInviteModalBtn');
+    const cancelBtn = document.getElementById('cancelModalBtn');
+    const confirmBtn = document.getElementById('confirmInviteBtn');
+    const quickForm = document.getElementById('inviteFormQuick');
+    const exportBtn = document.getElementById('exportAuditBtn');
+    const toggleStateBtn = document.getElementById('toggleStateBtn');
+    const resetFilterBtn = document.getElementById('resetFilterBtn');
+    
+    const tableView = document.getElementById('membersTableView');
+    const emptyState = document.getElementById('membersEmptyState');
+    const searchInput = document.getElementById('memberSearchInput');
+    const roleFilter = document.getElementById('roleFilter');
+    const membersTableBody = document.getElementById('membersTableBody');
+
+    const toast = document.getElementById('toastNotification');
+    const toastMessage = document.getElementById('toastMessage');
+
+    function showToast(msg) {
+      if (!toast || !toastMessage) return;
+      toastMessage.textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+    function openModal() {
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeModal() {
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', () => {
+        closeModal();
+        showToast('Enterprise invitation successfully dispatched to GitHub SAML.');
+      });
+    }
+
+    if (quickForm) {
+      quickForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        quickForm.reset();
+        showToast('Direct GitHub SAML invitation generated and queued.');
+      });
+    }
+
+    if (exportBtn) {
+      exportBtn.addEventListener('click', () => {
+        showToast('Exporting cryptographically signed audit log (JSON)...');
+      });
+    }
+
+    let isSimulatedEmpty = false;
+    function setEmptyView(showEmpty) {
+      if (!tableView || !emptyState) return;
+      if (showEmpty) {
+        tableView.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+      } else {
+        tableView.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+      }
+    }
+
+    if (toggleStateBtn) {
+      toggleStateBtn.addEventListener('click', () => {
+        isSimulatedEmpty = !isSimulatedEmpty;
+        setEmptyView(isSimulatedEmpty);
+      });
+    }
+
+    if (resetFilterBtn) {
+      resetFilterBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        if (roleFilter) roleFilter.value = 'all';
+        isSimulatedEmpty = false;
+        setEmptyView(false);
+        filterRows();
+      });
+    }
+
+    function filterRows() {
+      if (!membersTableBody) return;
+      const query = (searchInput?.value || '').toLowerCase().trim();
+      const selectedRole = roleFilter?.value || 'all';
+      const rows = membersTableBody.querySelectorAll('tr');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const matchesQuery = query === '' || text.includes(query);
+        const matchesRole = selectedRole === 'all' || text.includes(selectedRole.toLowerCase());
+
+        if (matchesQuery && matchesRole) {
+          row.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+
+      setEmptyView(visibleCount === 0);
+    }
+
+    if (searchInput) searchInput.addEventListener('input', filterRows);
+    if (roleFilter) roleFilter.addEventListener('change', filterRows);
+  })();
+</script></main></div></body></html>

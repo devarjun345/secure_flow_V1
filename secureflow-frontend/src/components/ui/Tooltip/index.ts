@@ -1,0 +1,1 @@
+export { TooltipComponent as Tooltip, type TooltipProps } from './Tooltip';

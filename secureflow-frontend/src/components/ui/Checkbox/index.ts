@@ -1,0 +1,1 @@
+export { CheckboxComponent as Checkbox, type CheckboxProps } from './Checkbox';

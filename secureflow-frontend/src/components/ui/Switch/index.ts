@@ -1,0 +1,1 @@
+export { SwitchComponent as Switch, type SwitchProps } from './Switch';

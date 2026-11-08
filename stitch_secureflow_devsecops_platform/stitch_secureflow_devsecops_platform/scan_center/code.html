@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#2d303a", "on-error-container": "#ffdad6", "surface-container-highest": "#32343f", "secondary": "#d0bcff", "on-secondary-fixed-variant": "#5516be", "surface": "#10131c", "primary-fixed": "#d8e2ff", "secondary-fixed-dim": "#d0bcff", "on-tertiary-fixed-variant": "#005236", "surface-tint": "#adc6ff", "on-tertiary-fixed": "#002113", "surface-container-low": "#181b25", "on-error": "#690005", "on-secondary": "#3c0091", "outline-variant": "#424754", "surface-container-lowest": "#0b0e17", "inverse-primary": "#005ac2", "inverse-surface": "#e0e2ef", "surface-container-high": "#272a34", "primary-fixed-dim": "#adc6ff", "secondary-fixed": "#e9ddff", "on-primary-fixed-variant": "#004395", "on-surface": "#e0e2ef", "secondary-container": "#571bc1", "error-container": "#93000a", "tertiary-container": "#00a572", "surface-container": "#1c1f29", "background": "#10131c", "primary-container": "#4d8eff", "tertiary-fixed-dim": "#4edea3", "tertiary": "#4edea3", "on-secondary-fixed": "#23005c", "primary": "#adc6ff", "surface-dim": "#10131c", "on-tertiary": "#003824", "outline": "#8c909f", "on-primary-container": "#00285d", "surface-variant": "#32343f", "on-primary-fixed": "#001a42", "surface-bright": "#363943", "tertiary-fixed": "#6ffbbe", "error": "#ffb4ab", "on-secondary-container": "#c4abff", "on-surface-variant": "#c2c6d6", "on-tertiary-container": "#00311f", "on-background": "#e0e2ef", "on-primary": "#002e6a" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-md": "1rem", "margin-mobile": "1rem", "gutter-mobile": "0.75rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "gutter": "1.5rem", "margin": "2rem" }, "fontFamily": { "headline-md": ["Geist"], "headline-sm": ["Geist"], "label-xs": ["JetBrains Mono"], "body-md": ["Inter"], "code-md": ["JetBrains Mono"], "code-sm": ["JetBrains Mono"], "display-xl": ["Geist"], "headline-lg-mobile": ["Geist"], "body-lg": ["Inter"], "code-lg": ["JetBrains Mono"], "headline-lg": ["Geist"], "body-sm": ["Inter"], "label-md": ["Inter"] }, "fontSize": { "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "code-md": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "code-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "400" }], "display-xl": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "code-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-md flex items-center justify-between bg-surface-container-low/40"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center"><span class="material-symbols-outlined text-primary text-headline-sm">security</span></div><span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">SecureFlow</span></div><span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-xs text-label-xs tracking-wider uppercase">ENTERPRISE</span></div><div class="px-space-md py-space-sm"><span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Mission Control</span></div><nav class="flex flex-col gap-space-xs px-space-sm" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="overview" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-base">grid_view</span><span class="font-label-md text-label-md">Overview</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="repositories" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-base">source_environment</span><span class="font-label-md text-label-md">Repositories</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm">14</span></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm rounded-lg transition-all bg-surface-container-high text-on-surface font-label-md" data-path="scan-center" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-base">radar</span><span class="font-label-md text-label-md">Scan Center</span></div><span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="vulnerabilities" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-base">gshield</span><span class="font-label-md text-label-md">Vulnerabilities</span></div><span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-code-sm text-code-sm font-semibold">3</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="security-reports" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-base">description</span><span class="font-label-md text-label-md">Security Reports</span></div></a><div class="my-space-xs px-space-sm"><div class="h-px w-full bg-surface-container-high/60"></div></div><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="team-and-access" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-base">group</span><span class="font-label-md text-label-md">Team & Access</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="settings" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-base">tune</span><span class="font-label-md text-label-md">Settings</span></div></a></nav></div><div class="p-space-md bg-surface-container-low/50 flex flex-col gap-space-sm"><div class="flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-xs text-label-xs text-outline uppercase">Engine Pipeline</span><span class="font-code-sm text-code-sm text-tertiary">ONLINE</span></div><div class="flex items-center justify-between px-space-sm py-space-xs rounded bg-surface-container-lowest"><span class="font-code-sm text-code-sm text-on-surface-variant">Trivy Core v0.51</span><span class="font-code-sm text-code-sm text-tertiary">ACTIVE</span></div><div class="flex items-center justify-between px-space-sm py-space-xs rounded bg-surface-container-lowest"><span class="font-code-sm text-code-sm text-on-surface-variant">Gitleaks v8.18</span><span class="font-code-sm text-code-sm text-primary">READY</span></div></div><div class="flex flex-col gap-space-xs pt-space-xs"><div class="flex justify-between font-label-xs text-label-xs text-on-surface-variant"><span>Storage Quota</span><span class="font-code-sm text-code-sm text-on-surface">68.4%</span></div><div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden"><div class="h-full bg-primary-container rounded-full w-[68%]"></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined text-primary text-base">verified</span><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Acme Corp</span><span class="font-label-xs text-label-xs text-outline leading-tight">SecOps Core</span></div><span class="material-symbols-outlined text-outline text-base">expand_more</span></div><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-sm text-outline text-base pointer-events-none">search</span><input class="w-96 pl-9 pr-14 py-space-xs rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-high transition-all" placeholder="Search CVEs, repositories, secrets, packages..." type="text"/><span class="absolute right-space-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-outline font-code-sm text-code-sm">⌘K</span></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container"><span class="w-2 h-2 rounded-full bg-tertiary"></span><span class="font-label-xs text-label-xs text-on-surface-variant font-medium">System Guard Active</span><span class="font-label-xs text-label-xs text-outline">|</span><span class="font-label-xs text-label-xs text-tertiary">0 Zero-Days</span></div><div class="flex items-center gap-space-sm"><button class="px-space-sm py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-space-xs" type="button"><span class="material-symbols-outlined text-base">terminal</span>Connect GitHub</button><button class="px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-md text-label-md font-semibold transition-all shadow-[0_0_14px_-2px_rgba(77,142,255,0.4)] flex items-center gap-space-xs" type="button"><span class="material-symbols-outlined text-base">play_arrow</span>Trigger Manual Scan</button></div><div class="h-5 w-px bg-surface-container-high"></div><div class="relative cursor-pointer p-space-xs rounded-lg hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-on-surface-variant text-headline-sm">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></div><div class="flex items-center gap-space-sm pl-space-xs cursor-pointer"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold">Alex Mercer</span><span class="font-label-xs text-label-xs text-outline">Principal SecOps Lead</span></div><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/ALJJyrCzuy7DChqWGe7d8bvYTVn-VS5xML6WMGiPSEfh6c4FNhj1xo5JdP5VeBev7h-t51280Psm5Ybueg4iKBh6Cw0taOzRThTc2f6xIIjrEkRk0Ns6qnE_TS6uyQrsUerjnpdWfxnpLvHgrQlZmqfRq33ONMlqRc5oYdEQV5GDvCTXeKbavmcdnzJx5Sxmm9CNrxCM2m_3KdUnhRx_9oY9o18fDN3JdJ-ygCiTLsoRrHumzw"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface-container-lowest"></span></div></div></div></header><main class="relative pt-16 bg-surface min-h-screen px-gutter py-space-lg w-full"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg max-w-[1720px] mx-auto w-full">
+<!-- Top Strategic Control Strip -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-xs text-label-xs uppercase tracking-wider">Telemetry Core Active</span>
+<span class="font-code-sm text-code-sm text-outline">RUNNER_CLUSTER_US_EAST_2</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Scan Center — Continuous Pipeline Inspection</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">Real-time orchestration of Trivy Dependency Analyzer & Gitleaks Secret Detector across connected CI/CD runners.</p>
+</div>
+<!-- Quick Orchestration Trigger Bar -->
+<div class="flex flex-wrap items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-low shadow-md">
+<!-- Target Repo Selector -->
+<div class="relative">
+<label class="sr-only" for="repo-select">Target Repository</label>
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface">
+<span class="material-symbols-outlined text-outline text-base">source_environment</span>
+<select class="bg-transparent font-code-sm text-code-sm text-on-surface focus:outline-none pr-4 cursor-pointer" id="repo-select">
+<option class="bg-surface-container-high text-on-surface" value="acme-corp/payment-gateway">acme-corp/payment-gateway</option>
+<option class="bg-surface-container-high text-on-surface" value="acme-corp/auth-microservice">acme-corp/auth-microservice</option>
+<option class="bg-surface-container-high text-on-surface" value="acme-corp/checkout-worker">acme-corp/checkout-worker</option>
+<option class="bg-surface-container-high text-on-surface" value="acme-corp/identity-mesh">acme-corp/identity-mesh</option>
+</select>
+</div>
+</div>
+<!-- Target Branch Selector -->
+<div class="relative">
+<label class="sr-only" for="branch-select">Target Branch</label>
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface">
+<span class="material-symbols-outlined text-outline text-base">fork_right</span>
+<select class="bg-transparent font-code-sm text-code-sm text-on-surface focus:outline-none pr-4 cursor-pointer" id="branch-select">
+<option class="bg-surface-container-high text-on-surface" value="main">main</option>
+<option class="bg-surface-container-high text-on-surface" value="staging">staging</option>
+<option class="bg-surface-container-high text-on-surface" value="develop">develop</option>
+<option class="bg-surface-container-high text-on-surface" value="feat/jwt-rotation">feat/jwt-rotation</option>
+</select>
+</div>
+</div>
+<!-- Scan Profile -->
+<div class="relative">
+<label class="sr-only" for="profile-select">Scan Profile</label>
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface">
+<span class="material-symbols-outlined text-outline text-base">tune</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none pr-4 cursor-pointer" id="profile-select">
+<option class="bg-surface-container-high text-on-surface" value="deep">Deep: Trivy + Gitleaks + SBOM</option>
+<option class="bg-surface-container-high text-on-surface" value="fast">Fast: Gitleaks Secrets Only</option>
+<option class="bg-surface-container-high text-on-surface" value="audit">Audit: Trivy Dependency CVEs</option>
+</select>
+</div>
+</div>
+<!-- Execute Action -->
+<button class="relative group overflow-hidden px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md transition-all shadow-[0_0_16px_rgba(77,142,255,0.4)] hover:shadow-[0_0_24px_rgba(77,142,255,0.65)] flex items-center gap-space-xs" id="btn-trigger-scan" type="button">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+</span>
+<span>Initiate Immediate Scan</span>
+<span class="material-symbols-outlined text-base group-hover:rotate-45 transition-transform">bolt</span>
+</button>
+</div>
+</div>
+<!-- Active Scan Execution Hero Card (72% Progress Inspection) -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low shadow-xl">
+<!-- Top Specular Atmospheric Highlight -->
+<div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary-container/40 to-transparent"></div>
+<!-- Sweep Radar Light Beam Background -->
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
+<div class="p-space-lg flex flex-col gap-space-lg">
+<!-- Target Header & Telemetry Status -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="p-space-sm rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-headline-md animate-pulse">radar</span>
+</div>
+<div class="flex flex-col">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface">acme-corp/auth-microservice</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-code-sm text-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">fork_right</span> feat/jwt-rotation
+                </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-code-sm text-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">commit</span> 8f31b2e
+                </span>
+<span class="font-body-sm text-body-sm text-outline">by Alex Mercer (@mchen)</span>
+</div>
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider mt-1">SESSION RUNNER ID: SF-RUN-0914-ALPHA</span>
+</div>
+</div>
+<!-- Status Meter & Percentage Badge -->
+<div class="flex flex-col sm:items-end gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-primary-container/20 text-primary font-label-xs text-label-xs uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                SCANNING IN PROGRESS
+              </span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">72%</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">Elapsed Time: 00:24.08 · Node 3 of 4 Active</span>
+</div>
+</div>
+<!-- Global Progress Bar with Glow Sweep -->
+<div class="relative w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary via-tertiary to-primary-container rounded-full w-[72%] transition-all duration-500 relative">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+</div>
+<!-- Pipeline Nodes Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Node 1: Clone & Unpack -->
+<div class="p-space-md rounded-lg bg-surface-container flex flex-col justify-between gap-space-sm transition-all hover:bg-surface-container-high">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-outline uppercase">Node 01</span>
+<span class="px-space-xs py-0.5 rounded bg-tertiary/15 text-tertiary font-code-sm text-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span> SUCCESS
+              </span>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface">Clone & Unpack AST</h2>
+<p class="font-code-sm text-code-sm text-outline mt-0.5">Repo tree checkout 48.2MB</p>
+</div>
+<div class="flex items-center justify-between font-code-sm text-code-sm pt-space-xs border-t-0 bg-surface-container-low px-space-xs py-1 rounded">
+<span class="text-on-surface-variant">Duration: 4.2s</span>
+<span class="text-tertiary">0 Errors</span>
+</div>
+</div>
+<!-- Node 2: Trivy Dependency Audit -->
+<div class="p-space-md rounded-lg bg-surface-container flex flex-col justify-between gap-space-sm transition-all hover:bg-surface-container-high">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-outline uppercase">Node 02</span>
+<span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-code-sm text-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">warning</span> FINDINGS (4)
+              </span>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface">Trivy Package Vulnerability Audit</h2>
+<p class="font-code-sm text-code-sm text-outline mt-0.5">Alpine v3.19 + go.sum</p>
+</div>
+<div class="flex items-center justify-between font-code-sm text-code-sm pt-space-xs bg-surface-container-low px-space-xs py-1 rounded">
+<span class="text-on-surface-variant">19.8s</span>
+<span class="text-error font-semibold">1 High, 3 Medium</span>
+</div>
+</div>
+<!-- Node 3: Gitleaks Entropy Scanner (ACTIVE) -->
+<div class="p-space-md rounded-lg bg-surface-container shadow-[0_0_16px_rgba(77,142,255,0.25)] flex flex-col justify-between gap-space-sm relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-primary-container/10 via-transparent to-primary-container/10 animate-pulse pointer-events-none"></div>
+<div class="flex items-center justify-between relative z-10">
+<span class="font-label-xs text-label-xs text-primary uppercase font-bold">Node 03 · RUNNING</span>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/30 text-primary font-code-sm text-code-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> 428 / 610 OBJS
+              </span>
+</div>
+<div class="relative z-10">
+<h2 class="font-label-md text-label-md text-on-surface">Gitleaks Entropy & Secret Detector</h2>
+<p class="font-code-sm text-code-sm text-outline mt-0.5">Rule matrix: 182 signatures</p>
+</div>
+<div class="flex items-center justify-between font-code-sm text-code-sm pt-space-xs bg-surface-container-high px-space-xs py-1 rounded relative z-10">
+<span class="text-primary font-medium">Scanning git tree HEAD~10...</span>
+<span class="text-tertiary">0 Leaks</span>
+</div>
+</div>
+<!-- Node 4: SBOM Generation -->
+<div class="p-space-md rounded-lg bg-surface-container-low/70 opacity-75 flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-outline uppercase">Node 04</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-outline font-code-sm text-code-sm">
+                QUEUED
+              </span>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface-variant">SBOM Generation & Policy Validation</h2>
+<p class="font-code-sm text-code-sm text-outline mt-0.5">CycloneDX v1.5 JSON</p>
+</div>
+<div class="flex items-center justify-between font-code-sm text-code-sm pt-space-xs bg-surface-container-lowest px-space-xs py-1 rounded">
+<span class="text-outline">Waiting for Node 03</span>
+<span class="text-outline">--:--</span>
+</div>
+</div>
+</div>
+<!-- Interactive Real-time Telemetry Terminal -->
+<div class="rounded-lg bg-surface-container-lowest overflow-hidden flex flex-col shadow-inner">
+<div class="px-space-md py-space-sm bg-surface-container-high/50 flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error/70"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed-dim/70"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary/70"></span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant font-medium ml-2">stdout / engine-telemetry-stream.sock</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs text-outline font-code-sm text-code-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span>TAIL MODE: ON</span>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1" id="clear-term-btn" type="button">
+<span class="material-symbols-outlined text-xs">restart_alt</span> Reset
+              </button>
+</div>
+</div>
+<div class="p-space-md font-code-sm text-code-sm h-48 overflow-y-auto flex flex-col gap-1.5 leading-relaxed bg-surface-container-lowest select-text" id="telemetry-log-stream">
+<div class="text-outline">[14:40:58.002] [ORCHESTRATOR] Assigned runner instance pod-us-east-runner-9104b. Target commit: 8f31b2e.</div>
+<div class="text-outline">[14:40:59.412] [GIT] Cloned ref refs/heads/feat/jwt-rotation (depth=50) in 3.4s.</div>
+<div class="text-tertiary">[14:41:02.114] [TRIVY] Scanning OS packages: Alpine Linux v3.19...</div>
+<div class="text-on-surface-variant">[14:41:04.882] [TRIVY] Checking 184 Go dependencies via go.sum manifest...</div>
+<div class="text-error">[14:41:06.194] [TRIVY] High Severity Flagged: CVE-2024-24790 (golang.org/x/net/html) - Fix available in v0.24.0</div>
+<div class="text-primary">[14:41:08.201] [GITLEAKS] Initialized engine v8.18.2. Loaded 182 detection rules from default baseline profile.</div>
+<div class="text-on-surface-variant">[14:41:10.009] [GITLEAKS] Scanning git tree HEAD~10 across 428 commit objects...</div>
+<div class="text-tertiary">[14:41:12.440] [GITLEAKS] Entropy analysis: 0 leaks identified in commit 8f31b2e. Proceeding with diff inspect...</div>
+<div class="text-primary flex items-center gap-1" id="active-terminal-cursor">
+<span>[14:41:14.908] [GITLEAKS] Verifying AWS/GCP/Slack regex pattern groups (batch 32/45)...</span>
+<span class="inline-block w-2 h-3.5 bg-primary animate-pulse"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Scan Overview Telemetry Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Metric 1: Active Running -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Active Executions</span>
+<span class="p-space-xs rounded-lg bg-primary-container/20 text-primary">
+<span class="material-symbols-outlined text-base">sync</span>
+</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-xl text-display-xl text-on-surface font-bold leading-none">2</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">runners active</span>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary">Max Cap: 16</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[12.5%]"></div>
+</div>
+</div>
+<!-- Metric 2: Completed Today -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Completed Today</span>
+<span class="p-space-xs rounded-lg bg-tertiary/15 text-tertiary">
+<span class="material-symbols-outlined text-base">task_alt</span>
+</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-xl text-display-xl text-on-surface font-bold leading-none">142</span>
+<span class="font-body-sm text-body-sm text-tertiary font-medium">+18% vs avg</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">99.3% Pass rate</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[94%]"></div>
+</div>
+</div>
+<!-- Metric 3: Failed / Timed Out -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Failed / Timed Out</span>
+<span class="p-space-xs rounded-lg bg-error-container text-on-error-container">
+<span class="material-symbols-outlined text-base">error_outline</span>
+</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-xl text-display-xl text-error font-bold leading-none">1</span>
+<span class="font-body-sm text-body-sm text-error font-medium">Degraded runner</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">Node #3 timeout</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-error h-full w-[5%]"></div>
+</div>
+</div>
+<!-- Metric 4: Avg Scan Latency -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Avg Scan Latency</span>
+<span class="p-space-xs rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-base">timer</span>
+</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-xl text-display-xl text-on-surface font-bold leading-none">38.4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">seconds</span>
+</div>
+<span class="font-code-sm text-code-sm text-tertiary">-4.1s faster</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[65%]"></div>
+</div>
+</div>
+</div>
+<!-- Scan History & Telemetry Master Table -->
+<div class="flex flex-col gap-space-md rounded-xl bg-surface-container-low p-space-md shadow-xl">
+<!-- Filter and Tab Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Filter Tabs -->
+<div class="flex flex-wrap items-center gap-space-xs bg-surface-container-lowest p-1 rounded-lg">
+<button class="tab-filter-btn px-space-md py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-all" type="button">All Scans (1,428)</button>
+<button class="tab-filter-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" type="button">Active (2)</button>
+<button class="tab-filter-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" type="button">Completed (1,398)</button>
+<button class="tab-filter-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1" type="button">
+<span>Flagged Issues</span>
+<span class="px-1.5 py-0.2 rounded-full bg-error-container text-on-error-container text-code-sm font-bold">28</span>
+</button>
+<button class="tab-filter-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" type="button">Failed (1)</button>
+</div>
+<!-- Search & Control -->
+<div class="flex items-center gap-space-sm">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left- space-sm text-outline text-base pointer-events-none pl-2">filter_alt</span>
+<input class="w-72 pl-9 pr-space-md py-1.5 rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-code-sm text-code-sm focus:outline-none focus:bg-surface-container-high transition-all" placeholder="Filter commit, scan ID, or committer..." type="text"/>
+</div>
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Export CSV Telemetry" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+</button>
+</div>
+</div>
+<!-- Scans Table Wrapper -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest text-outline font-label-xs text-label-xs uppercase tracking-wider">
+<th class="py-space-sm px-space-md rounded-l-lg">Scan ID</th>
+<th class="py-space-sm px-space-md">Target Repository</th>
+<th class="py-space-sm px-space-md">Trigger</th>
+<th class="py-space-sm px-space-md">Engine Spec</th>
+<th class="py-space-sm px-space-md">Duration</th>
+<th class="py-space-sm px-space-md">Detected Findings</th>
+<th class="py-space-sm px-space-md">Status</th>
+<th class="py-space-sm px-space-md text-right rounded-r-lg">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent font-code-sm text-code-sm">
+<!-- Row 1: Active Scan (auth-microservice) -->
+<tr class="hover:bg-surface-container/60 transition-colors bg-surface-container/20">
+<td class="py-space-sm px-space-md font-bold text-primary">SF-SCAN-8891</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-sm text-body-sm">acme-corp/auth-microservice</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-xs">fork_right</span> feat/jwt-rotation
+                    <span class="text-xs">·</span>
+<span class="text-primary">8f31b2e</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-code-sm text-code-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">call_merge</span> PR Hook #412
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">
+<span>Trivy + Gitleaks</span>
+</td>
+<td class="py-space-sm px-space-md text-primary">
+<span class="animate-pulse">00:24 (In Progress)</span>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex items-center gap-1">
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-semibold">1 H</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-secondary-fixed-dim font-semibold">3 M</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-outline">0 Secrets</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-primary-container/20 text-primary font-label-xs text-label-xs uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                  SCANNING
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="View Live Stream" type="button">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+<button class="p-1 rounded bg-error-container text-on-error-container hover:opacity-80 transition-opacity" title="Abort Scan" type="button">
+<span class="material-symbols-outlined text-base">stop_circle</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Active Scan (payment-gateway) -->
+<tr class="hover:bg-surface-container/60 transition-colors bg-surface-container/20">
+<td class="py-space-sm px-space-md font-bold text-primary">SF-SCAN-8890</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-sm text-body-sm">acme-corp/payment-gateway</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-xs">fork_right</span> staging
+                    <span class="text-xs">·</span>
+<span class="text-primary">c091d3f</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-code-sm text-code-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">terminal</span> Manual Run
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">
+<span>Gitleaks Core</span>
+</td>
+<td class="py-space-sm px-space-md text-primary">
+<span class="animate-pulse">00:08 (In Progress)</span>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="text-tertiary">Analyzing tree...</span>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-primary-container/20 text-primary font-label-xs text-label-xs uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                  SCANNING
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="View Stream" type="button">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+<button class="p-1 rounded bg-error-container text-on-error-container hover:opacity-80 transition-opacity" title="Abort Scan" type="button">
+<span class="material-symbols-outlined text-base">stop_circle</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Completed Scan (checkout-worker) -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md font-bold text-on-surface">SF-SCAN-8889</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-sm text-body-sm">acme-corp/checkout-worker</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-xs">fork_right</span> main
+                    <span class="text-xs">·</span>
+<span class="text-on-surface-variant">44be21a</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-code-sm text-code-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">commit</span> GitHub Push
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">
+<span>Trivy + SBOM</span>
+</td>
+<td class="py-space-sm px-space-md text-outline">32.6s</td>
+<td class="py-space-sm px-space-md">
+<span class="px-1.5 py-0.5 rounded bg-tertiary/15 text-tertiary font-semibold flex items-center w-fit gap-1">
+<span class="material-symbols-outlined text-xs">check</span> Clean (0 Vulns)
+                </span>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-tertiary/15 text-tertiary font-label-xs text-label-xs uppercase">
+                  COMPLETED
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="View Full Report" type="button">
+<span class="material-symbols-outlined text-base">description</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Download Log Archive" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Re-Run Pipeline Scan" type="button">
+<span class="material-symbols-outlined text-base">replay</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Flagged Scan (identity-mesh) -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md font-bold text-on-surface">SF-SCAN-8888</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-sm text-body-sm">acme-corp/identity-mesh</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-xs">fork_right</span> hotfix/saml-assertion
+                    <span class="text-xs">·</span>
+<span class="text-on-surface-variant">9a02fb1</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-code-sm text-code-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span> Daily Scheduled
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">
+<span>Trivy + Gitleaks</span>
+</td>
+<td class="py-space-sm px-space-md text-outline">41.2s</td>
+<td class="py-space-sm px-space-md">
+<div class="flex items-center gap-1">
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-semibold">2 Critical</span>
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-semibold">1 Secret</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-error-container text-on-error-container font-label-xs text-label-xs uppercase">
+                  FLAGGED
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="View Full Report" type="button">
+<span class="material-symbols-outlined text-base">description</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Download Logs" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Re-Run Pipeline Scan" type="button">
+<span class="material-symbols-outlined text-base">replay</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Failed Runner (inventory-sync) -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md font-bold text-outline">SF-SCAN-8887</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold font-body-sm text-body-sm">acme-corp/inventory-sync</span>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-xs">fork_right</span> develop
+                    <span class="text-xs">·</span>
+<span class="text-outline">ee184c7</span>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-code-sm text-code-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">commit</span> GitHub Push
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">
+<span>Trivy Core</span>
+</td>
+<td class="py-space-sm px-space-md text-error">120.0s (Timeout)</td>
+<td class="py-space-sm px-space-md">
+<span class="text-outline">Execution Aborted</span>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-error-container text-on-error-container font-label-xs text-label-xs uppercase">
+                  RUNNER FAIL
+                </span>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="View Fail Stacktrace" type="button">
+<span class="material-symbols-outlined text-base">bug_report</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Re-Run Pipeline Scan" type="button">
+<span class="material-symbols-outlined text-base">replay</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Runner Pool Health Strip -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-space-xs text-outline font-body-sm text-body-sm">
+<div class="flex items-center gap-space-sm">
+<span>Showing 1 to 5 of 1,428 executions</span>
+<span>·</span>
+<span class="text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> 15/16 Kubernetes Runners Online
+          </span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm disabled:opacity-40" disabled="" type="button">Previous</button>
+<span class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface font-code-sm text-code-sm font-semibold">1</span>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm" type="button">2</button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm" type="button">3</button>
+<span class="px-1">...</span>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm" type="button">286</button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-code-sm text-code-sm" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Dynamic log stream simulator for scan execution
+    const terminal = document.getElementById('telemetry-log-stream');
+    const cursor = document.getElementById('active-terminal-cursor');
+    const simulatedLogs = [
+      { text: "[14:41:16.120] [GITLEAKS] Inspected commits 8f31b2e..HEAD (428 files, 21,980 lines)", color: "text-on-surface-variant" },
+      { text: "[14:41:17.382] [GITLEAKS] High-entropy token found in tests/mock_token.go: marked benign mock fixture.", color: "text-tertiary" },
+      { text: "[14:41:19.004] [GITLEAKS] Secret detection passed with 0 unredacted credential alerts.", color: "text-tertiary" },
+      { text: "[14:41:20.155] [SBOM] Starting CycloneDX v1.5 JSON component generation for 184 binaries...", color: "text-primary" },
+      { text: "[14:41:22.780] [POLICY] Evaluating OPA Gatekeeper policy rules (Fail-on-Critical enabled)...", color: "text-secondary-fixed-dim" }
+    ];
+
+    let logIndex = 0;
+    const interval = setInterval(() => {
+      if (logIndex < simulatedLogs.length && terminal && cursor) {
+        const item = simulatedLogs[logIndex];
+        const newLog = document.createElement('div');
+        newLog.className = item.color;
+        newLog.textContent = item.text;
+        terminal.insertBefore(newLog, cursor);
+        terminal.scrollTop = terminal.scrollHeight;
+        logIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 3200);
+
+    // Interactive Trigger Scan Feedback
+    const triggerBtn = document.getElementById('btn-trigger-scan');
+    if (triggerBtn) {
+      triggerBtn.addEventListener('click', () => {
+        const originalText = triggerBtn.innerHTML;
+        triggerBtn.classList.add('opacity-75');
+        triggerBtn.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">refresh</span> Dispatching Runner...';
+        setTimeout(() => {
+          triggerBtn.innerHTML = '<span class="material-symbols-outlined text-base text-tertiary">check</span> Runner Dispatched #8892';
+          setTimeout(() => {
+            triggerBtn.innerHTML = originalText;
+            triggerBtn.classList.remove('opacity-75');
+          }, 2400);
+        }, 1200);
+      });
+    }
+
+    // Clear Terminal Action
+    const clearBtn = document.getElementById('clear-term-btn');
+    if (clearBtn && terminal && cursor) {
+      clearBtn.addEventListener('click', () => {
+        terminal.innerHTML = '';
+        const initLog = document.createElement('div');
+        initLog.className = 'text-outline';
+        initLog.textContent = '[SYSTEM] Console buffer flushed by operator Alex Mercer.';
+        terminal.appendChild(initLog);
+        terminal.appendChild(cursor);
+      });
+    }
+
+    // Filter Tabs Toggle Active Styles
+    const tabs = document.querySelectorAll('.tab-filter-btn');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('bg-surface-container-high', 'text-on-surface', 'font-semibold');
+          t.classList.add('text-on-surface-variant');
+        });
+        tab.classList.add('bg-surface-container-high', 'text-on-surface', 'font-semibold');
+        tab.classList.remove('text-on-surface-variant');
+      });
+    });
+  })();
+</script></main></div></body></html>

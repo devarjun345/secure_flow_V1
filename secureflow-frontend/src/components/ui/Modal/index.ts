@@ -1,0 +1,1 @@
+export { Modal, type ModalProps, ConfirmModal, type ConfirmModalProps } from './Modal';

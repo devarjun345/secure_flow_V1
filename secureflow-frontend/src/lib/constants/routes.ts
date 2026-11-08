@@ -1,0 +1,47 @@
+export const ROUTES = {
+  root: '/',
+  login: '/login',
+  register: '/register',
+  forgotPassword: '/forgot-password',
+  dashboard: '/dashboard',
+  repositories: '/repositories',
+  repositoryDetail: (repoId: string) => `/repositories/${repoId}`,
+  scanCenter: '/scan-center',
+  scans: '/scans',
+  scanDetail: (scanId: string) => `/scans/${scanId}`,
+  scanFindings: (scanId: string) => `/scans/${scanId}/findings`,
+  findings: '/findings',
+  findingDetail: (findingId: string) => `/findings/${findingId}`,
+  reportDetail: (reportId: string) => `/reports/${reportId}`,
+  settings: '/settings',
+  settingsAccount: '/settings/account',
+  settingsGitHub: '/settings/github',
+  settingsNotifications: '/settings/notifications',
+  settingsScanner: '/settings/scanner',
+  settingsDanger: '/settings/danger',
+  team: '/team',
+  teamMembers: '/team/members',
+  teamInvitations: '/team/invitations',
+  teamAudit: '/team/audit',
+  account: '/account',
+  notifications: '/notifications',
+} as const;
+
+export const PUBLIC_ROUTES = [
+  ROUTES.root,
+  ROUTES.login,
+  ROUTES.register,
+  ROUTES.forgotPassword,
+] as const;
+
+export const PROTECTED_ROUTES = [
+  ROUTES.dashboard,
+  ROUTES.repositories,
+  ROUTES.scanCenter,
+  ROUTES.scans,
+  ROUTES.findings,
+  ROUTES.settings,
+  ROUTES.team,
+  ROUTES.account,
+  ROUTES.notifications,
+] as const;

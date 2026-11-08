@@ -1,0 +1,1 @@
+export { TabsComponent as Tabs, type TabsProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, TabsContent, type TabsContentProps } from './Tabs';
