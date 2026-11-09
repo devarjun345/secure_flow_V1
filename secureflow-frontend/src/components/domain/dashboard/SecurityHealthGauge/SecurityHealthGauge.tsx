@@ -2,11 +2,8 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { RadialGauge, type RadialGaugeProps } from '@/components/ui/Progress';
-import { Card, CardContent, SectionHeader } from '@/components/layout/PageHeader';
-import { Badge, SeverityBadge } from '@/components/ui/Badge';
 import { Card as UICard } from '@/components/ui/Card';
-import { TrendingUpIcon, TrendingDownIcon, MinusIcon, ShieldIcon, KeyIcon, LayersIcon, FileTextIcon } from 'lucide-react';
+import { ShieldIcon, KeyIcon, LayersIcon, FileTextIcon } from 'lucide-react';
 
 export interface SecurityHealthGaugeProps {
   score: number;
@@ -158,7 +155,7 @@ export function SecurityHealthGauge({
                 >
                   <div className="flex justify-between font-label-xs text-label-xs">
                     <span className="flex items-center gap-1.5 text-text-muted">
-                      <metric.icon />
+                      {metric.icon}
                       {metric.label}
                     </span>
                     <span className={cn(
@@ -209,8 +206,6 @@ export function SecurityHealthGaugeCompact({
   breakdown,
   className,
 }: SecurityHealthGaugeCompactProps) {
-  const percentage = Math.min(100, Math.max(0, Math.round(score)));
-
   return (
     <UICard className={cn('p-4', className)}>
       <div className="flex items-center justify-between mb-4">

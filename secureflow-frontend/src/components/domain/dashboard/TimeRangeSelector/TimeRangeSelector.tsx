@@ -39,7 +39,6 @@ export function TimeRangeSelector({
   const [internalValue, setInternalValue] = useState<TimeRange>(
     controlledValue || (searchParams.get('timerange') as TimeRange) || '30d'
   );
-  const [isCustomOpen, setIsCustomOpen] = useState(false);
   const [customStart, setCustomStart] = useState<Date>(
     customRange?.start || new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
   );
@@ -80,7 +79,6 @@ export function TimeRangeSelector({
 
   const handleCustomRangeSubmit = () => {
     onCustomRangeChange?.({ start: customStart, end: customEnd });
-    setIsCustomOpen(false);
   };
 
   const formatDate = (date: Date) => {
@@ -144,7 +142,7 @@ export function TimeRangeSelector({
               />
             </div>
             <div className="flex justify-end gap-2 pt-2 border-t border-border">
-              <Button variant="ghost" size="sm" onClick={() => setIsCustomOpen(false)}>
+              <Button variant="ghost" size="sm" onClick={() => handleValueChange('30d')}>
                 Cancel
               </Button>
               <Button variant="primary" size="sm" onClick={handleCustomRangeSubmit}>

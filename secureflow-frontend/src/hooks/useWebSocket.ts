@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { WebSocketManager, WebSocketMessage, ConnectionStatus, WebSocketConfig } from '@/lib/realtime/WebSocketManager';
 
 export interface UseWebSocketOptions extends Omit<WebSocketConfig, 'url' | 'protocols' | 'onOpen' | 'onClose' | 'onError' | 'onMessage' | 'onStatusChange'> {
-  url: string;
+  url?: string;
   protocols?: string[];
   autoConnect?: boolean;
   onOpen?: () => void;
@@ -21,7 +21,6 @@ export interface UseWebSocketReturn {
   disconnect: () => void;
   reconnect: () => Promise<void>;
   error: Error | null;
-  reconnectAttempts: number;
 }
 
 export function useWebSocket(options: UseWebSocketOptions): UseWebSocketReturn {
@@ -41,12 +40,11 @@ export function useWebSocket(options: UseWebSocketOptions): UseWebSocketReturn {
   const [status, setStatus] = useState<ConnectionStatus>('disconnected');
   const [lastMessage, setLastMessage] = useState<WebSocketMessage | null>(null);
   const [error, setError] = useState<Error | null>(null);
-  const [reconnectAttempts, setReconnectAttempts] = useState(0);
 
   const initializeManager = useCallback(() => {
     if (!managerRef.current) {
       managerRef.current = new WebSocketManager({
-        url,
+        url: url || '',
         protocols,
         ...config,
         onOpen: () => {
@@ -110,47 +108,19 @@ export function useWebSocket(options: UseWebSocketOptions): UseWebSocketReturn {
     }
   }, []);
 
-  // Sync state from manager
-  useEffect(() => {
-    const manager = managerRef.current;
-    if (!manager) return;
-
-    const updateState = () => {
-      const state = manager.getState();
-      setStatus(state.status);
-      setReconnectAttempts(state.reconnectAttempts);
-      if (state.error) setError(state.error);
-    };
-
-    const interval = setInterval(updateState, 1000);
-    updateState();
-    return () => clearInterval(interval);
-  }, []);
-
-  const send = useCallback(
-    (message: Omit<WebSocketMessage, 'timestamp' | 'requestId'>) => {
-      return managerRef.current?.send(message) || '';
-    },
-    []
-  );
-
-  const sendAndWait = useCallback(
-    async <T = unknown>(message: Omit<WebSocketMessage, 'timestamp' | 'requestId'>, timeout?: number): Promise<T> => {
-      return managerRef.current?.sendAndWait<T>(message, timeout) as Promise<T>;
-    },
-    []
-  );
-
   return {
     status,
     lastMessage,
-    send,
-    sendAndWait,
+    send: (message: Omit<WebSocketMessage, 'timestamp' | 'requestId'>) => {
+      return managerRef.current?.send(message) || '';
+    },
+    sendAndWait: async <T = unknown>(message: Omit<WebSocketMessage, 'timestamp' | 'requestId'>, timeout?: number): Promise<T> => {
+      return managerRef.current?.sendAndWait<T>(message, timeout) as Promise<T>;
+    },
     connect,
     disconnect,
     reconnect,
     error,
-    reconnectAttempts,
   };
 }
 
@@ -179,15 +149,13 @@ export function useScanProgress(scanId: string, options?: UseWebSocketOptions) {
           eta: payload.eta,
         });
       }
-    }, [ws.lastMessage]);
-
-    return progress;
+    }
   }, [ws.lastMessage]);
 
   return { ...ws, progress };
 }
 
-export function useLiveEvents<T extends { type: string }>(
+export function useLiveEvents(
   eventTypes: string[],
   options?: UseWebSocketOptions
 ) {
@@ -203,8 +171,9 @@ export function useLiveEvents<T extends { type: string }>(
   const [events, setEvents] = useState<WebSocketMessage[]>([]);
 
   useEffect(() => {
-    if (ws.lastMessage && eventTypes.includes(ws.lastMessage.type)) {
-      setEvents((prev) => [ws.lastMessage, ...prev].slice(0, 100));
+    const message = ws.lastMessage;
+    if (message && eventTypes.includes(message.type)) {
+      setEvents((prev) => [message, ...prev].slice(0, 100));
     }
   }, [ws.lastMessage, eventTypes]);
 
@@ -227,8 +196,8 @@ export function useScanSubscription(scanIds: string[], options?: UseWebSocketOpt
     ...options,
     url: options?.url || `${process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000'}/ws/scans`,
     onMessage: (message) => {
-      if (message.type === 'scan_progress' && scanIds.includes(message.payload.scanId as string)) {
-        const payload = message.payload as { scanId: string; progress: number; stage: string; message: string; eta?: number };
+      const payload = message.payload as { scanId: string; progress: number; stage: string; message: string; eta?: number } | undefined;
+      if (message.type === 'scan_progress' && payload && scanIds.includes(payload.scanId)) {
         setScanProgress((prev) => ({
           ...prev,
           [payload.scanId]: {
@@ -279,7 +248,7 @@ export function useDashboardRealtime(options?: UseWebSocketOptions) {
     url: options?.url || `${process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000'}/ws/dashboard`,
     onMessage: (message) => {
       if (message.type === 'dashboard_update') {
-        setDashboardData(message.payload);
+        setDashboardData(message.payload as { healthScore: number; activeScans: number; criticalFindings: number; recentActivity: number });
       }
       options?.onMessage?.(message);
     },

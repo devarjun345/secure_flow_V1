@@ -1,1 +1,1 @@
-export { ActiveScansTable, ActiveScansTableCompact, type ActiveScansTableProps, type ActiveScansTableCompactProps, type ScanRow } from './ActiveScansTable';
+export { ActiveScansTable, type ActiveScansTableProps, type ScanRow } from './ActiveScansTable';

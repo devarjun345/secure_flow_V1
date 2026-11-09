@@ -1,31 +1,26 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
-import { Card, CardContent, SectionHeader } from '@/components/layout/PageHeader';
-import { Badge, SeverityBadge } from '@/components/ui/Badge';
+import { SeverityBadge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Avatar, AvatarGroup } from '@/components/ui/Avatar';
-import { Card as UICard } from '@/components/ui/Card';
+import { Card } from '@/components/ui/Card';
 import {
   GitBranchIcon,
   AlertTriangleIcon,
   ShieldIcon,
   KeyIcon,
-  GitHubIcon,
   UserIcon,
-  LockIcon,
   AlertCircleIcon,
   CheckCircleIcon,
   XCircleIcon,
-  ClockIcon,
-  RssFeedIcon,
-  FilterIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
+  Rss,
+  Layers,
   PauseIcon,
   PlayIcon,
+  PlayCircleIcon,
   DownloadIcon,
 } from 'lucide-react';
 import { formatRelativeTime } from '@/lib/utils/format';
@@ -116,7 +111,7 @@ const MOCK_EVENTS: Omit<AuditEvent, 'id' | 'timestamp'>[] = [
     type: 'secret_redacted',
     title: 'Secret redacted and rotated',
     description: 'Slack Incoming Webhook URL caught by Gitleaks. Quarantine applied; token rotated via AWS Secrets Manager.',
-    severity: 'warning',
+    severity: 'high',
     repository: { id: 'repo-1', name: 'payment-gateway', fullName: 'acme-corp/payment-gateway' },
     actor: { id: 'system', name: 'Gitleaks Scanner', avatarUrl: 'https://github.com/gitleaks.png' },
     metadata: { rotated: true, zeroExposure: true },
@@ -146,7 +141,160 @@ function generateId() {
 }
 
 function getRandomTimeOffset() {
-  return Math.floor(Math.random() * 300000); // 0-5 minutes
+  return Math.floor(Math.random() * 300000);
+}
+
+function getSeverityColor(severity: AuditEvent['severity']) {
+  switch (severity) {
+    case 'critical': return 'text-critical';
+    case 'high': return 'text-warning';
+    case 'medium': return 'text-info';
+    case 'low': return 'text-info';
+    case 'info': return 'text-primary';
+    default: return 'text-text-muted';
+  }
+}
+
+function EventItem({
+  event,
+  index,
+  eventConfig,
+  getSeverityColor,
+  formatRelativeTime,
+  onEventClick,
+}: {
+  event: AuditEvent;
+  index: number;
+  eventConfig: typeof EVENT_CONFIG;
+  getSeverityColor: (severity: AuditEvent['severity']) => string;
+  formatRelativeTime: (timestamp: string) => string;
+  onEventClick?: (event: AuditEvent) => void;
+}) {
+  const config = eventConfig[event.type];
+  const borderColor = config?.borderColor || 'primary';
+  const eventColor = getSeverityColor(event.severity);
+
+  return (
+    <motion.div
+      key={event.id}
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -20, scale: 0.95 }}
+      transition={{ duration: 0.2, delay: index * 0.05 }}
+      className={cn(
+        'p-4 rounded-lg flex flex-col gap-3 transition-all duration-200',
+        'bg-surface-1 hover:bg-surface-2',
+        `border-l-2 border-${borderColor}`
+      )}
+      onClick={() => onEventClick?.(event)}
+      style={{ cursor: onEventClick ? 'pointer' : 'default' }}
+    >
+      <div className="flex items-center justify-between font-label-xs text-label-xs">
+        <span className={cn('font-bold', eventColor)}>
+          {config?.label || event.type.toUpperCase()}
+        </span>
+        <span className="font-mono text-text-muted">{formatRelativeTime(event.timestamp)}</span>
+      </div>
+      <p className="text-body-sm text-text-primary leading-relaxed">
+        {event.description}
+      </p>
+      <div className="flex flex-wrap items-center gap-3 text-outline font-code-sm text-code-sm">
+        {event.repository && (
+          <span className="flex items-center gap-1">
+            <GitBranchIcon className="w-3.5 h-3.5" />
+            <span className="font-semibold text-text-muted">{event.repository.fullName || event.repository.name}</span>
+          </span>
+        )}
+        <span>•</span>
+        {(() => {
+          const cve = event.metadata?.cve;
+          if (cve) {
+            return (
+              <span className="flex items-center gap-1 text-critical">
+                <AlertTriangleIcon className="w-3.5 h-3.5" />
+                <span className="font-mono">{String(cve)}</span>
+              </span>
+            );
+          }
+          return null;
+        })()}
+        {(() => {
+          const pkg = event.metadata?.package;
+          if (pkg) {
+            return (
+              <span className="flex items-center gap-1">
+                <Layers className="w-3.5 h-3.5" />
+                <span className="font-mono">{String(pkg)}</span>
+              </span>
+            );
+          }
+          return null;
+        })()}
+        {(() => {
+          const policy = event.metadata?.policy;
+          if (policy) {
+            return (
+              <span className="flex items-center gap-1 text-warning">
+                <ShieldIcon className="w-3.5 h-3.5" />
+                <span className="font-mono">{String(policy)}</span>
+              </span>
+            );
+          }
+          return null;
+        })()}
+        {(() => {
+          const secretType = event.metadata?.secretType;
+          if (secretType) {
+            return (
+              <span className="flex items-center gap-1 text-critical">
+                <KeyIcon className="w-3.5 h-3.5" />
+                <span>{String(secretType)}</span>
+              </span>
+            );
+          }
+          return null;
+        })()}
+        <span className="flex items-center gap-1">
+          <UserIcon className="w-3.5 h-3.5" />
+          <span>{event.actor.name}</span>
+        </span>
+        {(() => {
+          const pr = event.metadata?.pr;
+          if (pr) {
+            return (
+              <span className="flex items-center gap-1">
+                <GitBranchIcon className="w-3.5 h-3.5" />
+                <span className="font-mono text-primary">{String(pr)}</span>
+              </span>
+            );
+          }
+          return null;
+        })()}
+        {(() => {
+          const branch = event.metadata?.branch;
+          if (branch) {
+            return (
+              <span className="flex items-center gap-1">
+                <GitBranchIcon className="w-3.5 h-3.5" />
+                <span className="font-mono">{String(branch)}</span>
+              </span>
+            );
+          }
+          return null;
+        })()}
+      </div>
+    </motion.div>
+  );
+}
+
+function EmptyState() {
+  return (
+    <div className="flex flex-col items-center justify-center py-12 text-text-muted">
+      <Rss className="w-12 h-12 text-text-muted/50 mb-4" />
+      <p className="text-body-md">No events match the current filter</p>
+      <p className="text-body-sm">Try adjusting your filter or wait for new events</p>
+    </div>
+  );
 }
 
 export function LiveAuditStream({
@@ -174,7 +322,6 @@ export function LiveAuditStream({
   const [paused, setPaused] = useState(false);
   const [filter, setFilter] = useState<string>('all');
   const [showExportMenu, setShowExportMenu] = useState(false);
-  const eventsContainerRef = useRef<HTMLDivElement>(null);
 
   const eventConfig = EVENT_CONFIG;
 
@@ -182,7 +329,7 @@ export function LiveAuditStream({
     if (filter === 'all') return true;
     if (filter === 'critical') return event.severity === 'critical';
     if (filter === 'high') return event.severity === 'high' || event.severity === 'critical';
-    if (filter === 'warning') return event.severity === 'warning';
+    if (filter === 'medium') return event.severity === 'medium' || event.severity === 'high' || event.severity === 'critical';
     if (filter === 'info') return event.severity === 'info' || event.severity === 'low';
     return true;
   });
@@ -190,11 +337,11 @@ export function LiveAuditStream({
   const addMockEvent = useCallback(() => {
     if (paused) return;
     const mockEvent = MOCK_EVENTS[Math.floor(Math.random() * MOCK_EVENTS.length)];
-    const newEvent: AuditEvent = {
+    const newEvent = {
       ...mockEvent,
       id: generateId(),
       timestamp: new Date().toISOString(),
-    };
+    } as AuditEvent;
     setEvents((prev) => [newEvent, ...prev].slice(0, maxEvents));
   }, [maxEvents]);
 
@@ -227,28 +374,30 @@ export function LiveAuditStream({
     setShowExportMenu(false);
   };
 
-  const formatTime = (timestamp: string) => {
-    const date = new Date(timestamp);
-    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-  };
-
-  const getSeverityColor = (severity: AuditEvent['severity']) => {
-    switch (severity) {
-      case 'critical': return 'text-critical';
-      case 'high': return 'text-warning';
-      case 'medium': return 'text-info';
-      case 'low': return 'text-info';
-      case 'info': return 'text-primary';
-      default: return 'text-text-muted';
+  const renderEventList = () => {
+    if (filteredEvents.length === 0) {
+      return <EmptyState />;
     }
+
+    return filteredEvents.map((event, index) => (
+      <EventItem
+        key={event.id}
+        event={event}
+        index={index}
+        eventConfig={eventConfig}
+        getSeverityColor={getSeverityColor}
+        formatRelativeTime={formatRelativeTime}
+        onEventClick={onEventClick}
+      />
+    ));
   };
 
   return (
-    <UICard className={cn('flex flex-col', className)}>
+    <Card className={cn('flex flex-col', className)}>
       <div className="p-4 lg:p-6 border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <RssFeedIcon className="w-5 h-5 text-tertiary" />
+            <Rss className="w-5 h-5 text-tertiary" />
             <h3 className="text-headline-sm font-display font-semibold text-text-primary">Live Audit Stream</h3>
           </div>
           <span className={cn(
@@ -289,10 +438,13 @@ export function LiveAuditStream({
             </AnimatePresence>
           </div>
           <div className="flex items-center gap-1 bg-surface-1 rounded-lg p-1">
-            {(['all', 'critical', 'high', 'warning', 'info'] as const).map((f) => (
+            {(['all', 'critical', 'high', 'medium', 'info'] as const).map((f) => (
               <button
                 key={f}
-                onClick={() => setFilter(f)}
+                onClick={() => {
+                  setFilter(f);
+                  onFilterChange?.(f);
+                }}
                 className={cn(
                   'px-2 py-1 rounded font-label-xs text-label-xs transition-colors',
                   filter === f
@@ -326,110 +478,11 @@ export function LiveAuditStream({
           transition={{ duration: 0.2 }}
           className="flex flex-col gap-3 max-h-[500px] overflow-y-auto pr-1"
         >
-          {filteredEvents.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-text-muted">
-              <RssFeedIcon className="w-12 h-12 text-text-muted/50 mb-4" />
-              <p className="text-body-md">No events match the current filter</p>
-              <p className="text-body-sm">Try adjusting your filter or wait for new events</p>
-            </div>
-          ) : (
-            filteredEvents.map((event, index) => {
-              const config = eventConfig[event.type];
-              const borderColor = config?.borderColor || 'primary';
-              const eventColor = getSeverityColor(event.severity);
-
-              return (
-                <motion.div
-                  key={event.id}
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                  transition={{ duration: 0.2, delay: index * 0.05 }}
-                  className={cn(
-                    'p-4 rounded-lg flex flex-col gap-3 transition-all duration-200',
-                    'bg-surface-1 hover:bg-surface-2',
-                    `border-l-2 border-${borderColor}`
-                  )}
-                  onClick={() => onEventClick?.(event)}
-                  style={{ cursor: onEventClick ? 'pointer' : 'default' }}
-                >
-                  <div className="flex items-center justify-between font-label-xs text-label-xs">
-                    <span className={cn('font-bold', eventColor)}>
-                      {config?.label || event.type.toUpperCase()}
-                    </span>
-                    <span className="font-mono text-text-muted">{formatRelativeTime(event.timestamp)}</span>
-                  </div>
-                  <p className="text-body-sm text-text-primary leading-relaxed">
-                    {event.description}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-3 text-outline font-code-sm text-code-sm">
-                    {event.repository && (
-                      <span className="flex items-center gap-1">
-                        <GitBranchIcon className="w-3.5 h-3.5" />
-                        <span className="font-semibold text-text-muted">{event.repository.fullName || event.repository.name}</span>
-                      </span>
-                    )}
-                    <span>•</span>
-                    {event.metadata?.cve && (
-                      <span className="flex items-center gap-1 text-critical">
-                        <AlertTriangleIcon className="w-3.5 h-3.5" />
-                        <span className="font-mono">{event.metadata.cve}</span>
-                      </span>
-                    )}
-                    {event.metadata?.package && (
-                      <span className="flex items-center gap-1">
-                        <LayersIcon className="w-3.5 h-3.5" />
-                        <span className="font-mono">{event.metadata.package}</span>
-                      </span>
-                    )}
-                    {event.metadata?.policy && (
-                      <span className="flex items-center gap-1 text-warning">
-                        <ShieldIcon className="w-3.5 h-3.5" />
-                        <span className="font-mono">{event.metadata.policy}</span>
-                      </span>
-                    )}
-                    {event.metadata?.secretType && (
-                      <span className="flex items-center gap-1 text-critical">
-                        <KeyIcon className="w-3.5 h-3.5" />
-                        <span>{event.metadata.secretType}</span>
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1">
-                      <UserIcon className="w-3.5 h-3.5" />
-                      <span>{event.actor.name}</span>
-                    </span>
-                    {event.metadata?.pr && (
-                      <span className="flex items-center gap-1">
-                        <GitBranchIcon className="w-3.5 h-3.5" />
-                        <span className="font-mono text-primary">{event.metadata.pr}</span>
-                      </span>
-                    )}
-                    {event.metadata?.branch && (
-                      <span className="flex items-center gap-1">
-                        <GitBranchIcon className="w-3.5 h-3.5" />
-                        <span className="font-mono">{event.metadata.branch}</span>
-                      </span>
-                    )}
-                  </div>
-                </motion.div>
-              )
-            )}
-          )}
+          {renderEventList()}
         </motion.div>
       </AnimatePresence>
-    </UICard>
+    </Card>
   );
-}
-
-function getSeverityColor(severity: AuditEvent['severity']) {
-  switch (severity) {
-    case 'critical': return 'text-critical';
-    case 'high': return 'text-warning';
-    case 'medium': return 'text-info';
-    case 'low': return 'text-info';
-    case 'info': return 'text-primary';
-    default: return 'text-text-muted';
-  }
 }
 
 export function LiveAuditStreamCompact({
@@ -477,9 +530,7 @@ export function LiveAuditStreamCompact({
                 <AvatarGroup max={3} size="xs">
                   <Avatar name={event.actor.name} size="xs" />
                 </AvatarGroup>
-                <span>{event.actor.name}</span>
-                <span className="text-border">•</span>
-                <span>{formatRelativeTime(event.timestamp)}</span>
+                <span className="font-mono">{formatRelativeTime(event.timestamp)}</span>
               </div>
             </div>
           </motion.div>

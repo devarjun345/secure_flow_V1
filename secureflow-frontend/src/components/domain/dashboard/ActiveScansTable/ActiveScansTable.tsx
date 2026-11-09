@@ -2,16 +2,15 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Card, CardContent, SectionHeader } from '@/components/layout/PageHeader';
 import { Button } from '@/components/ui/Button';
 import { Badge, SeverityBadge } from '@/components/ui/Badge';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Pagination } from '@/components/ui/Pagination';
 import { DataTable, type ColumnDef, type PaginationState, type SortingState } from '@/components/ui/DataTable';
-import { SearchIcon, FilterIcon, GitBranchIcon, AlertTriangleIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon, PlayCircleIcon, ClockIcon, ExternalLinkIcon, XCircleIcon, CheckCircleIcon } from 'lucide-react';
+import { SearchIcon, AlertTriangleIcon, ArrowRightIcon, PlayCircleIcon, ClockIcon, ExternalLinkIcon, XCircleIcon, CheckCircleIcon } from 'lucide-react';
 import { useState, useMemo, useCallback } from 'react';
-import { formatDurationShort, formatRelativeTime } from '@/lib/utils/format';
+import { formatDurationShort } from '@/lib/utils/format';
 
 export interface ScanRow {
   id: string;
@@ -45,20 +44,13 @@ export interface ActiveScansTableProps {
 }
 
 const STATUS_CONFIG = {
-  queued: { label: 'Queued', variant: 'default' as const, icon: <ClockIcon className="w-3 h-3" /> },
-  running: { label: 'Running', variant: 'info' as const, icon: <PlayCircleIcon className="w-3 h-3" /> },
-  completed: { label: 'Completed', variant: 'success' as const, icon: <CheckCircleIcon className="w-3 h-3" /> },
-  failed: { label: 'Failed', variant: 'critical' as const, icon: <XCircleIcon className="w-3 h-3" /> },
-  timeout: { label: 'Timed Out', variant: 'critical' as const, icon: <ClockIcon className="w-3 h-3" /> },
-  flagged: { label: 'Flagged', variant: 'warning' as const, icon: <AlertTriangleIcon className="w-3 h-3" /> },
-  cancelled: { label: 'Cancelled', variant: 'default' as const, icon: <XCircleIcon className="w-3 h-3" /> },
-};
-
-const TRIGGER_CONFIG = {
-  manual: { label: 'Manual', variant: 'default' as const },
-  webhook: { label: 'Webhook', variant: 'info' as const },
-  scheduled: { label: 'Scheduled', variant: 'success' as const },
-  api: { label: 'API', variant: 'default' as const },
+  queued: { label: 'Queued', severity: 'info' as const, icon: <ClockIcon className="w-3 h-3" /> },
+  running: { label: 'Running', severity: 'info' as const, icon: <PlayCircleIcon className="w-3 h-3" /> },
+  completed: { label: 'Completed', severity: 'low' as const, icon: <CheckCircleIcon className="w-3 h-3" /> },
+  failed: { label: 'Failed', severity: 'critical' as const, icon: <XCircleIcon className="w-3 h-3" /> },
+  timeout: { label: 'Timed Out', severity: 'critical' as const, icon: <ClockIcon className="w-3 h-3" /> },
+  flagged: { label: 'Flagged', severity: 'high' as const, icon: <AlertTriangleIcon className="w-3 h-3" /> },
+  cancelled: { label: 'Cancelled', severity: 'info' as const, icon: <XCircleIcon className="w-3 h-3" /> },
 };
 
 export function ActiveScansTable({
@@ -104,8 +96,8 @@ export function ActiveScansTable({
       })
       .sort((a, b) => {
         if (!sorting.key) return 0;
-        const aVal = (a as Record<string, unknown>)[sorting.key];
-        const bVal = (b as Record<string, unknown>)[sorting.key];
+        const aVal = (a as unknown as Record<string, unknown>)[sorting.key];
+        const bVal = (b as unknown as Record<string, unknown>)[sorting.key];
         if (aVal === bVal) return 0;
         const comparison = String(aVal).localeCompare(String(bVal), undefined, { numeric: true });
         return sorting.direction === 'asc' ? comparison : -comparison;
@@ -118,11 +110,10 @@ export function ActiveScansTable({
     return filteredScans.slice(start, end);
   }, [filteredScans, pagination.page, pagination.pageSize]);
 
-  const handleSort = useCallback((key: string) => {
-    setSorting((prev) => ({
-      key,
-      direction: prev.key === key && prev.direction === 'asc' ? 'desc' : 'asc',
-    }));
+  const handleSort = useCallback((sorting: SortingState) => {
+    if (sorting.key) {
+      setSorting(sorting);
+    }
   }, []);
 
   const handlePageChange = useCallback((page: number) => {
@@ -132,25 +123,6 @@ export function ActiveScansTable({
   const handlePageSizeChange = useCallback((pageSize: number) => {
     setPagination((prev) => ({ ...prev, pageSize, page: 1, totalPages: Math.ceil(filteredScans.length / pageSize) }));
   }, [filteredScans.length]);
-
-  const statusOptions = [
-    { value: 'all', label: 'All Status' },
-    { value: 'queued', label: 'Queued' },
-    { value: 'running', label: 'Running' },
-    { value: 'completed', label: 'Completed' },
-    { value: 'failed', label: 'Failed' },
-    { value: 'timeout', label: 'Timed Out' },
-    { value: 'flagged', label: 'Flagged' },
-    { value: 'cancelled', label: 'Cancelled' },
-  ];
-
-  const triggerOptions = [
-    { value: 'all', label: 'All Triggers' },
-    { value: 'manual', label: 'Manual' },
-    { value: 'webhook', label: 'Webhook' },
-    { value: 'scheduled', label: 'Scheduled' },
-    { value: 'api', label: 'API' },
-  ];
 
   const columns: ColumnDef<ScanRow>[] = useMemo(() => [
     {
@@ -207,9 +179,7 @@ export function ActiveScansTable({
       accessor: (row) => {
         const config = STATUS_CONFIG[row.status];
         return (
-          <SeverityBadge severity={config.variant} size="sm" showIcon>
-            {config.label}
-          </SeverityBadge>
+          <SeverityBadge severity={config.severity} size="sm" showIcon />
         );
       },
       sortable: true,
@@ -279,25 +249,6 @@ export function ActiveScansTable({
     },
   ], []);
 
-  const statusOptions = [
-    { value: 'all', label: 'All Status' },
-    { value: 'queued', label: 'Queued' },
-    { value: 'running', label: 'Running' },
-    { value: 'completed', label: 'Completed' },
-    { value: 'failed', label: 'Failed' },
-    { value: 'timeout', label: 'Timed Out' },
-    { value: 'flagged', label: 'Flagged' },
-    { value: 'cancelled', label: 'Cancelled' },
-  ];
-
-  const triggerOptions = [
-    { value: 'all', label: 'All Triggers' },
-    { value: 'manual', label: 'Manual' },
-    { value: 'webhook', label: 'Webhook' },
-    { value: 'scheduled', label: 'Scheduled' },
-    { value: 'api', label: 'API' },
-  ];
-
   if (loading) {
     return (
       <div className="card rounded-lg overflow-hidden">
@@ -323,7 +274,7 @@ export function ActiveScansTable({
     );
   }
 
-  const statusOptionsForSelect = [
+  const filterStatusOptions = [
     { value: 'all', label: 'All Status' },
     { value: 'queued', label: 'Queued' },
     { value: 'running', label: 'Running' },
@@ -334,7 +285,7 @@ export function ActiveScansTable({
     { value: 'cancelled', label: 'Cancelled' },
   ];
 
-  const triggerOptionsForSelect = [
+  const filterTriggerOptions = [
     { value: 'all', label: 'All Triggers' },
     { value: 'manual', label: 'Manual' },
     { value: 'webhook', label: 'Webhook' },
@@ -359,13 +310,13 @@ export function ActiveScansTable({
           <Select
             value={statusFilter}
             onValueChange={setStatusFilter}
-            options={statusOptionsForSelect}
+            options={filterStatusOptions}
             className="w-auto min-w-[160px]"
           />
           <Select
             value={triggerFilter}
             onValueChange={setTriggerFilter}
-            options={triggerOptionsForSelect}
+            options={filterTriggerOptions}
             className="w-auto min-w-[160px]"
           />
         </div>

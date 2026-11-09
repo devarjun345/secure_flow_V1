@@ -1,35 +1,26 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PageHeader } from '@/components/layout/PageHeader';
+import { Suspense } from 'react';
 import { SecurityHealthGauge } from '@/components/domain/dashboard/SecurityHealthGauge';
 import { VulnerabilityMatrix } from '@/components/domain/dashboard/VulnerabilityMatrix';
 import { ActiveScansTable } from '@/components/domain/dashboard/ActiveScansTable';
 import { LiveAuditStream } from '@/components/domain/dashboard/LiveAuditStream';
-import { CveSpotlight, CveSpotlightInline } from '@/components/domain/dashboard/CveSpotlight';
+import { CveSpotlight } from '@/components/domain/dashboard/CveSpotlight';
 import { TimeRangeSelector } from '@/components/domain/dashboard/TimeRangeSelector/TimeRangeSelector';
-import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import { Avatar, AvatarGroup } from '@/components/ui/Avatar';
 import {
-  LayoutDashboardIcon,
   GitBranchIcon,
   AlertTriangleIcon,
   KeyIcon,
   ActivityIcon,
-  ClockIcon,
-  ShieldIcon,
-  CheckCircleIcon,
-  XCircleIcon,
-  RssFeedIcon,
   BoltIcon,
   FileTextIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
+  ChevronDown,
+  Lock,
+  Globe,
+  Database,
 } from 'lucide-react';
-import { formatRelativeTime } from '@/lib/utils/format';
 import { cn } from '@/lib/utils';
 
 const mockKPIs = [
@@ -60,13 +51,13 @@ const mockTrendData = [
 const mockActiveScans = [
   {
     id: 'scan-1',
-    repository: { name: 'payment-gateway', owner: 'acme-corp', fullName: 'acme-corp/payment-gateway', icon: <LockIcon className="w-4 h-4" /> },
+    repository: { name: 'payment-gateway', owner: 'acme-corp', fullName: 'acme-corp/payment-gateway', icon: <Lock className="w-4 h-4" /> },
     branch: 'main',
     commitSha: 'e7b9c1a',
     triggerType: 'webhook' as const,
     status: 'completed' as const,
     progress: 100,
-    stage: 'complete',
+    stage: 'complete' as const,
     startedAt: '2024-01-20T14:32:15Z',
     duration: 38000,
     findings: { critical: 1, high: 2, medium: 5, low: 3, info: 0 },
@@ -80,20 +71,20 @@ const mockActiveScans = [
     triggerType: 'webhook' as const,
     status: 'running' as const,
     progress: 68,
-    stage: 'gitleaks',
+    stage: 'gitleaks' as const,
     startedAt: '2024-01-20T15:00:00Z',
     findings: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
     engines: ['gitleaks'],
   },
   {
     id: 'scan-3',
-    repository: { name: 'frontend-portal', owner: 'acme-corp', fullName: 'acme-corp/frontend-portal', icon: <GlobeIcon className="w-4 h-4" /> },
+    repository: { name: 'frontend-portal', owner: 'acme-corp', fullName: 'acme-corp/frontend-portal', icon: <Globe className="w-4 h-4" /> },
     branch: 'staging',
     commitSha: '99d3e4b',
     triggerType: 'scheduled' as const,
     status: 'completed' as const,
     progress: 100,
-    stage: 'complete',
+    stage: 'complete' as const,
     startedAt: '2024-01-20T14:00:00Z',
     duration: 24000,
     findings: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
@@ -101,13 +92,13 @@ const mockActiveScans = [
   },
   {
     id: 'scan-4',
-    repository: { name: 'data-pipeline-worker', owner: 'acme-corp', fullName: 'acme-corp/data-pipeline-worker', icon: <DatabaseIcon className="w-4 h-4" /> },
+    repository: { name: 'data-pipeline-worker', owner: 'acme-corp', fullName: 'acme-corp/data-pipeline-worker', icon: <Database className="w-4 h-4" /> },
     branch: 'develop',
     commitSha: '2c8e11f',
     triggerType: 'webhook' as const,
     status: 'failed' as const,
     progress: 100,
-    stage: 'trivy',
+    stage: 'trivy' as const,
     startedAt: '2024-01-19T10:00:00Z',
     duration: 72000,
     findings: { critical: 2, high: 0, medium: 0, low: 0, info: 0 },
@@ -219,17 +210,7 @@ USER worker`,
   lastSeen: '2024-03-29T14:30:00Z',
 };
 
-function GlobeIcon({ className }: { className?: string }) {
-  return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z" /></svg>;
-}
-
-function DatabaseIcon({ className }: { className?: string }) {
-  return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>;
-}
-
 export default function DashboardPage() {
-  const [timeRange, setTimeRange] = useState('30d');
-
   return (
     <div className="space-y-6">
       {/* SOC Header with Context Ribbon */}
@@ -263,17 +244,19 @@ export default function DashboardPage() {
 
         {/* Action Panel */}
         <div className="flex flex-wrap items-center gap-2 lg:ml-auto">
-          <TimeRangeSelector
-            value="30d"
-            onChange={(v) => console.log('Time range changed:', v)}
-            syncWithUrl={false}
-            className="hidden sm:flex"
-          />
+          <Suspense fallback={<div className="hidden sm:flex h-8 w-32 animate-pulse bg-surface-2 rounded" />}>
+            <TimeRangeSelector
+              value="30d"
+              onChange={(v) => console.log('Time range changed:', v)}
+              syncWithUrl={false}
+              className="hidden sm:flex"
+            />
+          </Suspense>
           <div className="relative inline-flex items-center">
             <Button variant="secondary" size="sm" className="gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-tertiary" />
               <span>Env: Production</span>
-              <ChevronDownIcon className="w-4 h-4 text-outline" />
+              <ChevronDown className="w-4 h-4 text-outline" />
             </Button>
           </div>
           <Button variant="primary" size="sm" className="gap-2" style={{ boxShadow: '0 0 18px -2px rgba(77,142,255,0.45)' }}>
@@ -374,8 +357,8 @@ export default function DashboardPage() {
           <CveSpotlight
             finding={mockFinding}
             onClose={() => console.log('Close CVE detail')}
-            onGeneratePR={() => console.log('Generate PR')}
-            onQuarantine={() => console.log('Quarantine')}
+            onGeneratePR={async () => { console.log('Generate PR'); }}
+            onQuarantine={async () => { console.log('Quarantine'); }}
           />
         </div>
       </div>

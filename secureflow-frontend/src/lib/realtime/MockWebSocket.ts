@@ -69,9 +69,10 @@ export class MockWebSocket {
       }, 10);
     } else if (message.type === 'subscribe_scans') {
       setTimeout(() => {
+        const payload = message.payload as { scanIds: string[] } | undefined;
         this.emit('message', {
           type: 'subscribed',
-          payload: { scanIds: message.payload.scanIds },
+          payload: { scanIds: payload?.scanIds || [] },
           timestamp: new Date().toISOString(),
         });
       }, 50);
@@ -188,15 +189,17 @@ export class MockWebSocket {
         { type: 'engine_sync', title: 'Engine sync completed', severity: 'info' },
       ];
       const event = events[Math.floor(Math.random() * events.length)];
-      this.emit('message', {
-        type: event.type,
-        payload: {
-          title: event.title,
-          severity: event.severity,
-          description: `Mock event: ${event.title}`,
-        },
-        timestamp: new Date().toISOString(),
-      });
+      if (event) {
+        this.emit('message', {
+          type: event.type,
+          payload: {
+            title: event.title,
+            severity: event.severity,
+            description: `Mock event: ${event.title}`,
+          },
+          timestamp: new Date().toISOString(),
+        });
+      }
     }, 10000);
 
     this.timers.set('audit', auditTimer);
